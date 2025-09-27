@@ -86,9 +86,12 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
           <Text style={styles.loadingText}>Loading events...</Text>
         </View>
       ) : (
-        <ScrollView style={styles.eventsList}>
-          {events.map((event) => (
-            <TouchableOpacity key={event.id} style={styles.eventCard}>
+        <ScrollView 
+        style={styles.eventsList}
+        contentContainerStyle={{ paddingBottom: 20 }}
+        showsVerticalScrollIndicator={true}>
+          {events.map((event, index) => (
+            <TouchableOpacity key={event.id || `event-${index}`} style={styles.eventCard}>
               <View style={styles.eventHeader}>
                 <Text style={styles.eventTitle}>{event.title}</Text>
                 <Text style={styles.eventCategory}>{event.category}</Text>
@@ -102,7 +105,9 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                 <Text style={styles.eventTime}>
                   {formatDate(event.date)} • {event.time}
                 </Text>
-                <Text style={styles.eventLocation}>{event.location}</Text>
+                <Text style={styles.eventLocation}>
+                {typeof event.location === 'string' ? event.location : event.location || 'Location TBD'}
+                </Text>
                 <Text style={styles.eventOrganization}>{event.organization}</Text>
               </View>
 
