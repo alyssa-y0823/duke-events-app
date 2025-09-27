@@ -86,10 +86,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
           <Text style={styles.loadingText}>Loading events...</Text>
         </View>
       ) : (
-        <ScrollView 
-        style={styles.eventsList}
-        contentContainerStyle={{ paddingBottom: 20 }}
-        showsVerticalScrollIndicator={true}>
+        <ScrollView style={styles.eventsList} contentContainerStyle={{ paddingBottom: 20 }} showsVerticalScrollIndicator={true}>
           {events.map((event, index) => (
             <TouchableOpacity key={event.id && event.id !== '-1' ? event.id : `event-${index}`} style={styles.eventCard}>
               <View style={styles.eventHeader}>
@@ -206,6 +203,7 @@ const styles = StyleSheet.create({
   },
   eventsList: {
     flex: 1,
+    maxHeight: 600,
   },
   eventCard: {
     backgroundColor: 'white',
