@@ -91,7 +91,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         contentContainerStyle={{ paddingBottom: 20 }}
         showsVerticalScrollIndicator={true}>
           {events.map((event, index) => (
-            <TouchableOpacity key={event.id || `event-${index}`} style={styles.eventCard}>
+            <TouchableOpacity key={event.id && event.id !== '-1' ? event.id : `event-${index}`} style={styles.eventCard}>
               <View style={styles.eventHeader}>
                 <Text style={styles.eventTitle}>{event.title}</Text>
                 <Text style={styles.eventCategory}>{event.category}</Text>

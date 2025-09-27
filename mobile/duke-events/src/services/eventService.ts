@@ -1,5 +1,4 @@
-// src/services/eventService.ts
-
+// eventService-json.ts - For JSON backend
 interface BaseEvent {
   id: string;
   title: string;
@@ -23,7 +22,7 @@ export interface ExtendedEvent extends BaseEvent {
   organization: string;
 }
 
-// API function to fetch events from backend
+// API function to fetch events from JSON backend
 export const eventsData = async (days = 30): Promise<any[]> => {
   try {
     const response = await fetch(`http://localhost:3000/events?future_days=${days}`);
@@ -31,6 +30,7 @@ export const eventsData = async (days = 30): Promise<any[]> => {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
+    console.log(`Received ${data.length} events from JSON backend`);
     return data;
   } catch (error) {
     console.error('Fetch error:', error instanceof Error ? error.message : String(error));
@@ -38,19 +38,20 @@ export const eventsData = async (days = 30): Promise<any[]> => {
   }
 };
 
-const convertDukeCalendarEvent = (event: any): ExtendedEvent => {
+// Convert JSON backend response to app format
+const convertJsonEvent = (event: any): ExtendedEvent => {
   return {
-    id: event.id || `duke-${Date.now()}-${Math.random()}`,
+    id: event.id || event.guid || `json-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
     title: event.summary || 'Untitled Event',
     description: event.description || '',
-    date: new Date(parseInt(event.start_timestamp) * 1000), // CHANGE THIS BACK
-    time: formatDukeEventTime(event),
+    date: event.start_timestamp ? new Date(event.start_timestamp * 1000) : new Date(),
+    time: formatJsonEventTime(event),
     location: event.location?.address || 'Duke University',
-    category: mapDukeCalendarCategory(event.categories),
+    category: mapJsonCategory(event.categories),
     organizerId: 'duke-calendar',
     attendees: [],
     maxAttendees: undefined,
-    tags: generateTagsFromDukeCalendar(event),
+    tags: generateJsonTags(event),
     capacity: undefined,
     registrationUrl: event.event_url || event.link,
     contactEmail: event.contact?.email,
@@ -59,11 +60,11 @@ const convertDukeCalendarEvent = (event: any): ExtendedEvent => {
   };
 };
 
-const formatDukeEventTime = (event: any): string => {
+const formatJsonEventTime = (event: any): string => {
   try {
     if (event.start_timestamp && event.end_timestamp) {
-      const start = new Date(parseInt(event.start_timestamp) * 1000);
-      const end = new Date(parseInt(event.end_timestamp) * 1000);
+      const start = new Date(event.start_timestamp * 1000);
+      const end = new Date(event.end_timestamp * 1000);
       
       const startTime = start.toLocaleTimeString('en-US', { 
         hour: 'numeric', 
@@ -85,14 +86,10 @@ const formatDukeEventTime = (event: any): string => {
   }
 };
 
-const mapDukeCalendarCategory = (categories: any): string => {
-  if (!categories) return 'General';
+const mapJsonCategory = (categories: any): string => {
+  if (!categories || !Array.isArray(categories) || categories.length === 0) return 'General';
   
-  // Handle both single category and array of categories
-  const categoryList = Array.isArray(categories) ? categories : [categories];
-  if (categoryList.length === 0) return 'General';
-  
-  const firstCategory = categoryList[0].toLowerCase();
+  const firstCategory = categories[0].toLowerCase();
   
   if (firstCategory.includes('lecture') || firstCategory.includes('academic') || firstCategory.includes('seminar')) {
     return 'Academic';
@@ -109,41 +106,31 @@ const mapDukeCalendarCategory = (categories: any): string => {
   }
 };
 
-const generateTagsFromDukeCalendar = (event: any): string[] => {
+const generateJsonTags = (event: any): string[] => {
   const tags: string[] = [];
   
-  // Add from categories
-  if (event.categories) {
-    const categoryList = Array.isArray(event.categories) ? event.categories : [event.categories];
-    categoryList.forEach((cat: string) => {
+  if (event.categories && Array.isArray(event.categories)) {
+    event.categories.forEach((cat: string) => {
       tags.push(cat.toLowerCase().replace(/\s+/g, '-'));
     });
   }
   
-  // Add from location
   if (event.location?.address) {
     const location = event.location.address.toLowerCase();
     if (location.includes('cameron')) tags.push('cameron-indoor');
     if (location.includes('chapel')) tags.push('duke-chapel');
     if (location.includes('perkins')) tags.push('perkins-library');
-    if (location.includes('fitzpatrick')) tags.push('fitzpatrick-center');
   }
   
-  // Add from sponsor
   if (event.sponsor) {
     tags.push(event.sponsor.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, ''));
   }
   
-  return tags.slice(0, 5); // Limit to 5 tags
+  return tags.slice(0, 5);
 };
 
-// Mock data fallback - empty array, only use real API data
-const mockEventData: ExtendedEvent[] = [];
-
-// Event service class
 export class EventService {
   private static instance: EventService;
-  private mockEvents: ExtendedEvent[] = mockEventData;
 
   private constructor() {}
 
@@ -154,60 +141,53 @@ export class EventService {
     return EventService.instance;
   }
 
-  // Get all events - only from Duke Calendar API
   async getAllEvents(): Promise<ExtendedEvent[]> {
     try {
-      console.log('Fetching all events from Duke Calendar API...');
-      const dukeCalendarEvents = await eventsData(30);
+      console.log('Fetching all events from JSON backend...');
+      const events = await eventsData(30);
       
-      if (dukeCalendarEvents && dukeCalendarEvents.length > 0) {
-        console.log(`Fetched ${dukeCalendarEvents.length} events from Duke Calendar`);
-        return dukeCalendarEvents.map(convertDukeCalendarEvent);
+      if (events && events.length > 0) {
+        console.log(`Fetched ${events.length} events from JSON backend`);
+        return events.map(convertJsonEvent);
       } else {
-        console.log('No events from Duke Calendar API');
+        console.log('No events from JSON backend');
         return [];
       }
     } catch (error) {
-      console.error('Failed to fetch from Duke Calendar API:', error instanceof Error ? error.message : String(error));
+      console.error('Failed to fetch from JSON backend:', error instanceof Error ? error.message : String(error));
       return [];
     }
   }
 
   async getUpcomingEvents(): Promise<ExtendedEvent[]> {
-  try {
-    console.log('Fetching upcoming events from Duke Calendar API...');
-    const dukeCalendarEvents = await eventsData(7);
-    
-    if (dukeCalendarEvents && dukeCalendarEvents.length > 0) {
-      console.log(`Fetched ${dukeCalendarEvents.length} upcoming events from Duke Calendar`);
-      const convertedEvents = dukeCalendarEvents.map(convertDukeCalendarEvent);
+    try {
+      console.log('Fetching upcoming events from JSON backend...');
+      const events = await eventsData(7);
       
-      // Filter for truly upcoming events
-      const now = new Date();
-      const weekFromNow = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
-      
-      console.log(`Filtering events between ${now} and ${weekFromNow}`);
-      
-      const filteredEvents = convertedEvents.filter((event: ExtendedEvent) => {
-        const isUpcoming = event.date >= now && event.date <= weekFromNow;
-        console.log(`Event: "${event.title}" - Date: ${event.date} - Is upcoming: ${isUpcoming}`);
-        return isUpcoming;
-      });
-      
-      console.log(`Found ${filteredEvents.length} upcoming events after filtering`);
-      
-      return filteredEvents.sort((a, b) => a.date.getTime() - b.date.getTime());
-    } else {
-      console.log('No upcoming events from Duke Calendar API');
+      if (events && events.length > 0) {
+        console.log(`Fetched ${events.length} upcoming events from JSON backend`);
+        const convertedEvents = events.map(convertJsonEvent);
+        
+        const now = new Date();
+        const weekFromNow = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
+        
+        const filteredEvents = convertedEvents.filter((event: ExtendedEvent) => {
+          const isUpcoming = event.date >= now && event.date <= weekFromNow;
+          return isUpcoming;
+        });
+        
+        console.log(`Found ${filteredEvents.length} upcoming events after filtering`);
+        return filteredEvents.sort((a, b) => a.date.getTime() - b.date.getTime());
+      } else {
+        console.log('No upcoming events from JSON backend');
+        return [];
+      }
+    } catch (error) {
+      console.error('Failed to fetch upcoming events:', error instanceof Error ? error.message : String(error));
       return [];
     }
-  } catch (error) {
-    console.error('Failed to fetch upcoming events:', error instanceof Error ? error.message : String(error));
-    return [];
   }
-}
 
-  // Search events by title, description, or tags
   async searchEvents(query: string): Promise<ExtendedEvent[]> {
     const allEvents = await this.getAllEvents();
     const searchTerm = query.toLowerCase();
@@ -220,33 +200,6 @@ export class EventService {
     );
   }
 
-  // Filter events by category
-  async getEventsByCategory(category: string): Promise<ExtendedEvent[]> {
-    const allEvents = await this.getAllEvents();
-    return allEvents.filter((event: ExtendedEvent) => 
-      event.category.toLowerCase() === category.toLowerCase()
-    );
-  }
-
-  // Filter events by tags
-  async getEventsByTags(tags: string[]): Promise<ExtendedEvent[]> {
-    const allEvents = await this.getAllEvents();
-    return allEvents.filter((event: ExtendedEvent) =>
-      tags.some((tag: string) => 
-        event.tags.some((eventTag: string) => eventTag.includes(tag.toLowerCase()))
-      )
-    );
-  }
-
-  // Get events by organization
-  async getEventsByOrganization(organization: string): Promise<ExtendedEvent[]> {
-    const allEvents = await this.getAllEvents();
-    return allEvents.filter((event: ExtendedEvent) =>
-      event.organization.toLowerCase().includes(organization.toLowerCase())
-    );
-  }
-
-  // Test if backend is available
   async testBackendConnection(): Promise<boolean> {
     try {
       const response = await fetch('http://localhost:3000/health');
@@ -254,32 +207,6 @@ export class EventService {
     } catch {
       return false;
     }
-  }
-
-  // Get event by ID
-  async getEventById(id: string): Promise<ExtendedEvent | null> {
-    const allEvents = await this.getAllEvents();
-    return allEvents.find((event: ExtendedEvent) => event.id === id) || null;
-  }
-
-  // Get events happening today
-  async getTodaysEvents(): Promise<ExtendedEvent[]> {
-    const allEvents = await this.getAllEvents();
-    const today = new Date();
-    const todayString = today.toDateString();
-    
-    return allEvents.filter((event: ExtendedEvent) =>
-      event.date.toDateString() === todayString
-    ).sort((a, b) => a.date.getTime() - b.date.getTime());
-  }
-
-  // Get events for a specific date range
-  async getEventsInDateRange(startDate: Date, endDate: Date): Promise<ExtendedEvent[]> {
-    const allEvents = await this.getAllEvents();
-    
-    return allEvents.filter((event: ExtendedEvent) =>
-      event.date >= startDate && event.date <= endDate
-    ).sort((a, b) => a.date.getTime() - b.date.getTime());
   }
 }
 
