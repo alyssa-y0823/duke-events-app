@@ -3,15 +3,44 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import AuthScreen from './src/screens/AuthScreen';
 import HomeScreen from './src/screens/HomeScreen';
+import EventDetailScreen from './src/screens/EventDetailScreen';
+import { ExtendedEvent } from './src/services/eventService';
 
-const Stack = createStackNavigator();
+// Add the type definition here
+export type RootStackParamList = {
+  Auth: undefined;
+  Home: undefined;
+  EventDetail: { event: ExtendedEvent };
+};
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Auth">
-        <Stack.Screen name="Auth" component={AuthScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Navigator 
+        initialRouteName="Auth"
+        screenOptions={{
+          headerStyle: { backgroundColor: '#003366' },
+          headerTintColor: '#fff',
+          headerTitleStyle: { fontWeight: 'bold' },
+        }}
+      >
+        <Stack.Screen 
+          name="Auth" 
+          component={AuthScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen 
+          name="Home" 
+          component={HomeScreen}
+          options={{ title: 'Duke Events' }}
+        />
+        <Stack.Screen 
+          name="EventDetail" 
+          component={EventDetailScreen}
+          options={{ title: 'Event Details' }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
