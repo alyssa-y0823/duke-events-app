@@ -7,8 +7,7 @@ interface AuthScreenProps {
 
 export default function AuthScreen({ navigation }: AuthScreenProps) {
   const handleLogin = () => {
-    // For now, just navigate to Home
-    navigation.navigate('Home');
+    navigation.navigate('Preferences');
   };
 
   return (

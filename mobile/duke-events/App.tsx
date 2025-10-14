@@ -5,10 +5,12 @@ import AuthScreen from './src/screens/AuthScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import EventDetailScreen from './src/screens/EventDetailScreen';
 import { ExtendedEvent } from './src/services/eventService';
+import PreferencesSetupScreen from './src/screens/PreferencesSetupScreen';
 
 // Add the type definition here
 export type RootStackParamList = {
   Auth: undefined;
+  Preferences: undefined;
   Home: undefined;
   EventDetail: { event: ExtendedEvent };
 };
@@ -40,6 +42,11 @@ export default function App() {
           name="EventDetail" 
           component={EventDetailScreen}
           options={{ title: 'Event Details' }}
+        />
+        <Stack.Screen 
+          name="Preferences" 
+          component={PreferencesSetupScreen}
+          options={{ title: 'Set Up Your Profile' }}
         />
       </Stack.Navigator>
     </NavigationContainer>
