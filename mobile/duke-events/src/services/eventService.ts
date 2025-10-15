@@ -1,26 +1,5 @@
-// eventService-json.ts - For JSON backend
-interface BaseEvent {
-  id: string;
-  title: string;
-  description: string;
-  date: Date;
-  time: string;
-  location: string;
-  category: string;
-  organizerId: string;
-  attendees: string[];
-  maxAttendees?: number;
-}
-
-export interface ExtendedEvent extends BaseEvent {
-  imageUrl?: string;
-  tags: string[];
-  capacity?: number;
-  registrationUrl?: string;
-  contactEmail?: string;
-  isRecurring: boolean;
-  organization: string;
-}
+// src/services/eventService.ts
+import { ExtendedEvent } from '../types';
 
 // API function to fetch events from JSON backend
 export const eventsData = async (days = 30): Promise<any[]> => {
@@ -56,7 +35,10 @@ const convertJsonEvent = (event: any): ExtendedEvent => {
     registrationUrl: event.event_url || event.link,
     contactEmail: event.contact?.email,
     isRecurring: false,
-    organization: event.sponsor || 'Duke University'
+    organization: event.sponsor || 'Duke University',
+    // These will be added later by classifier
+    classification: undefined,
+    relevanceScore: undefined,
   };
 };
 

@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import AuthScreen from './src/screens/AuthScreen';
 import HomeScreen from './src/screens/HomeScreen';
 import EventDetailScreen from './src/screens/EventDetailScreen';
-import { ExtendedEvent } from './src/services/eventService';
+import { ExtendedEvent } from './src/types';
 import PreferencesSetupScreen from './src/screens/PreferencesSetupScreen';
 
 // Add the type definition here

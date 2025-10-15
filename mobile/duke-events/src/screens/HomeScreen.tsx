@@ -1,6 +1,18 @@
+// src/screens/HomeScreen.tsx
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { eventService, ExtendedEvent } from '../services/eventService';
+import { 
+  View, 
+  Text, 
+  StyleSheet, 
+  ScrollView, 
+  TouchableOpacity, 
+  ActivityIndicator,
+  RefreshControl 
+} from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { eventService } from '../services/eventService';
+import { eventClassifier, ClassificationResult } from '../services/eventClassifier';
+import { ExtendedEvent, SimpleUserPreferences } from '../types';
 
 interface HomeScreenProps {
   navigation: any;
@@ -8,25 +20,180 @@ interface HomeScreenProps {
 
 export default function HomeScreen({ navigation }: HomeScreenProps) {
   const [events, setEvents] = useState<ExtendedEvent[]>([]);
+  const [preferences, setPreferences] = useState<SimpleUserPreferences | null>(null);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState<'all' | 'upcoming'>('upcoming');
+  const [classifying, setClassifying] = useState(false);
+  const [refreshing, setRefreshing] = useState(false);
+  const [filter, setFilter] = useState<'recommended' | 'upcoming' | 'all'>('recommended');
 
   useEffect(() => {
+    loadPreferences();
     loadEvents();
   }, [filter]);
+
+  const loadPreferences = async () => {
+    try {
+      const savedPrefs = await AsyncStorage.getItem('userPreferences');
+      if (savedPrefs) {
+        setPreferences(JSON.parse(savedPrefs));
+      }
+    } catch (error) {
+      console.error('Error loading preferences:', error);
+    }
+  };
 
   const loadEvents = async () => {
     setLoading(true);
     try {
-      const eventData = filter === 'upcoming' 
+      const eventData = filter === 'upcoming' || filter === 'recommended'
         ? await eventService.getUpcomingEvents()
         : await eventService.getAllEvents();
-      setEvents(eventData);
+      
+      // Check if events are already classified in cache
+      const cachedClassifications = await loadCachedClassifications();
+      
+      const enhancedEvents: ExtendedEvent[] = eventData.map(event => {
+        const cached = cachedClassifications.get(event.id);
+        return {
+          ...event,
+          classification: cached,
+          relevanceScore: cached && preferences ? calculateRelevanceScore(event, cached, preferences) : 0,
+        };
+      });
+      
+      setEvents(enhancedEvents);
+      
+      // Classify unclassified events in background
+      const unclassified = enhancedEvents.filter(e => !e.classification);
+      if (unclassified.length > 0) {
+        classifyEventsInBackground(unclassified);
+      }
     } catch (error) {
       console.error('Failed to load events:', error);
     } finally {
       setLoading(false);
     }
+  };
+
+  const classifyEventsInBackground = async (eventsToClassify: ExtendedEvent[]) => {
+    setClassifying(true);
+    try {
+      const classifications = await eventClassifier.classifyEvents(eventsToClassify);
+      
+      // Cache the classifications
+      await cacheClassifications(classifications);
+      
+      // Update events with classifications
+      setEvents(prevEvents => 
+        prevEvents.map(event => {
+          const classification = classifications.get(event.id);
+          if (classification) {
+            return {
+              ...event,
+              classification,
+              relevanceScore: preferences ? calculateRelevanceScore(event, classification, preferences) : 0,
+            };
+          }
+          return event;
+        })
+      );
+    } catch (error) {
+      console.error('Error classifying events:', error);
+    } finally {
+      setClassifying(false);
+    }
+  };
+
+  const loadCachedClassifications = async (): Promise<Map<string, ClassificationResult>> => {
+    try {
+      const cached = await AsyncStorage.getItem('eventClassifications');
+      if (cached) {
+        const parsed = JSON.parse(cached);
+        return new Map(Object.entries(parsed));
+      }
+    } catch (error) {
+      console.error('Error loading cached classifications:', error);
+    }
+    return new Map();
+  };
+
+  const cacheClassifications = async (classifications: Map<string, ClassificationResult>) => {
+    try {
+      const existing = await loadCachedClassifications();
+      classifications.forEach((value, key) => {
+        existing.set(key, value);
+      });
+      
+      const toStore = Object.fromEntries(existing);
+      await AsyncStorage.setItem('eventClassifications', JSON.stringify(toStore));
+    } catch (error) {
+      console.error('Error caching classifications:', error);
+    }
+  };
+
+  const calculateRelevanceScore = (
+    event: ExtendedEvent, 
+    classification: ClassificationResult,
+    prefs: SimpleUserPreferences
+  ): number => {
+    let score = 0;
+    
+    // Interest matching (highest weight) - 10 points per match
+    const interestMatches = classification.relevantInterests.filter((interest: string) =>
+      prefs.interests.includes(interest)
+    );
+    score += interestMatches.length * 10;
+    
+    // Major matching - 15 points if exact match
+    if (classification.relevantMajors.includes(prefs.major)) {
+      score += 15;
+    }
+    
+    // Year relevance - up to 10 points based on year-specific score
+    const yearKey = prefs.year.toLowerCase() as keyof typeof classification.yearRelevance;
+    score += classification.yearRelevance[yearKey] || 5;
+    
+    // Tag matching with user interests - 5 points per match
+    const allTags = [...event.tags, ...classification.enhancedTags];
+    const tagMatches = allTags.filter((tag: string) =>
+      prefs.interests.some((interest: string) =>
+        tag.toLowerCase().includes(interest.toLowerCase()) ||
+        interest.toLowerCase().includes(tag.toLowerCase())
+      )
+    );
+    score += tagMatches.length * 5;
+    
+    // Recency boost
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const eventDate = new Date(event.date);
+    eventDate.setHours(0, 0, 0, 0);
+    const daysUntil = Math.ceil((eventDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
+    
+    if (daysUntil >= 0 && daysUntil <= 3) {
+      score += 5;
+    } else if (daysUntil > 3 && daysUntil <= 7) {
+      score += 2;
+    }
+    
+    return Math.min(score, 100); // Cap at 100
+  };
+
+  const getSortedEvents = () => {
+    const eventsCopy = [...events];
+    
+    if (filter === 'recommended' && preferences) {
+      return eventsCopy.sort((a, b) => (b.relevanceScore || 0) - (a.relevanceScore || 0));
+    } else {
+      return eventsCopy.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    }
+  };
+
+  const onRefresh = async () => {
+    setRefreshing(true);
+    await loadPreferences();
+    await loadEvents();
+    setRefreshing(false);
   };
 
   const formatDate = (date: Date) => {
@@ -47,21 +214,65 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
     }
   };
 
+  const sortedEvents = getSortedEvents();
+
   return (
     <View style={styles.container}>
-      {/* Header with logout */}
+      {/* Header */}
       <View style={styles.headerContainer}>
-        <Text style={styles.header}>Duke Events</Text>
-        <TouchableOpacity 
-          style={styles.logoutButtonTopRight}
-          onPress={() => navigation.navigate('Auth')}
-        >
-          <Text style={styles.logoutTextTopRight}>Logout</Text>
-        </TouchableOpacity>
+        <View>
+          <Text style={styles.header}>
+            Duke Events {preferences ? `• ${preferences.year}` : ''}
+          </Text>
+          <Text style={styles.subheader}>
+            {sortedEvents.length} {filter === 'recommended' ? 'recommended' : ''} events
+            {classifying && ' • Analyzing...'}
+          </Text>
+        </View>
+        <View style={styles.headerButtons}>
+          <TouchableOpacity 
+            style={styles.settingsButton}
+            onPress={() => navigation.navigate('Preferences')}
+          >
+            <Text style={styles.settingsIcon}>⚙️</Text>
+          </TouchableOpacity>
+          <TouchableOpacity 
+            style={styles.logoutButtonTopRight}
+            onPress={() => navigation.navigate('Auth')}
+          >
+            <Text style={styles.logoutTextTopRight}>Logout</Text>
+          </TouchableOpacity>
+        </View>
       </View>
+
+      {/* Preferences Setup Prompt */}
+      {!preferences && (
+        <View style={styles.setupPrompt}>
+          <Text style={styles.setupPromptTitle}>🎯 Get AI-Powered Recommendations</Text>
+          <Text style={styles.setupPromptText}>
+            Set up your preferences and we'll use AI to find the perfect events for you!
+          </Text>
+          <TouchableOpacity
+            style={styles.setupButton}
+            onPress={() => navigation.navigate('Preferences')}
+          >
+            <Text style={styles.setupButtonText}>Set Up Now</Text>
+          </TouchableOpacity>
+        </View>
+      )}
       
       {/* Filter buttons */}
       <View style={styles.filterContainer}>
+        {preferences && (
+          <TouchableOpacity
+            style={[styles.filterButton, filter === 'recommended' && styles.activeFilter]}
+            onPress={() => setFilter('recommended')}
+          >
+            <Text style={[styles.filterText, filter === 'recommended' && styles.activeFilterText]}>
+              For You
+            </Text>
+          </TouchableOpacity>
+        )}
         <TouchableOpacity
           style={[styles.filterButton, filter === 'upcoming' && styles.activeFilter]}
           onPress={() => setFilter('upcoming')}
@@ -86,51 +297,87 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
           <Text style={styles.loadingText}>Loading events...</Text>
         </View>
       ) : (
-        <ScrollView style={styles.eventsList} contentContainerStyle={{ paddingBottom: 20 }} showsVerticalScrollIndicator={true}>
-          {events.map((event, index) => (
-            <TouchableOpacity 
-            key={event.id && event.id !== '-1' ? event.id : `event-${index}`} 
-            onPress={() => navigation.navigate('EventDetail', { event })}
-            style={styles.eventCard}
-            >
-              <View style={styles.eventHeader}>
-                <Text style={styles.eventTitle}>{event.title}</Text>
-                <Text style={styles.eventCategory}>{event.category}</Text>
-              </View>
-              
-              <Text style={styles.eventDescription} numberOfLines={2}>
-                {event.description}
-              </Text>
-              
-              <View style={styles.eventDetails}>
-                <Text style={styles.eventTime}>
-                  {formatDate(event.date)} • {event.time}
-                </Text>
-                <Text style={styles.eventLocation}>
-                {typeof event.location === 'string' ? event.location : event.location || 'Location TBD'}
-                </Text>
-                <Text style={styles.eventOrganization}>{event.organization}</Text>
-              </View>
+        <ScrollView 
+          style={styles.eventsList} 
+          contentContainerStyle={{ paddingBottom: 20 }} 
+          showsVerticalScrollIndicator={true}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }
+        >
+          {sortedEvents.map((event, index) => {
+            const score = event.relevanceScore || 0;
+            const isHighlyRelevant = score >= 40;
 
-              {/* Tags */}
-              <View style={styles.tagsContainer}>
-                {event.tags.slice(0, 3).map((tag, index) => (
-                  <View key={index} style={styles.tag}>
-                    <Text style={styles.tagText}>{tag}</Text>
+            return (
+              <TouchableOpacity 
+                key={event.id && event.id !== '-1' ? event.id : `event-${index}`} 
+                onPress={() => navigation.navigate('EventDetail', { event })}
+                style={styles.eventCard}
+              >
+                {/* Recommended Badge */}
+                {isHighlyRelevant && filter === 'recommended' && (
+                  <View style={styles.recommendedBadge}>
+                    <Text style={styles.recommendedBadgeText}>⭐ Recommended</Text>
                   </View>
-                ))}
-              </View>
+                )}
 
-              {/* Capacity info */}
-              {event.capacity && (
-                <Text style={styles.capacityText}>
-                  Capacity: {event.capacity} people
+                <View style={styles.eventHeader}>
+                  <Text style={styles.eventTitle}>{event.title}</Text>
+                  <Text style={styles.eventCategory}>{event.category}</Text>
+                </View>
+                
+                <Text style={styles.eventDescription} numberOfLines={2}>
+                  {event.description}
                 </Text>
-              )}
-            </TouchableOpacity>
-          ))}
+                
+                <View style={styles.eventDetails}>
+                  <Text style={styles.eventTime}>
+                    {formatDate(event.date)} • {event.time}
+                  </Text>
+                  <Text style={styles.eventLocation}>
+                    {typeof event.location === 'string' ? event.location : event.location || 'Location TBD'}
+                  </Text>
+                  <Text style={styles.eventOrganization}>{event.organization}</Text>
+                </View>
+
+                {/* Tags and Classification Info */}
+                <View style={styles.tagsContainer}>
+                  {event.classification?.enhancedTags.slice(0, 2).map((tag, tagIndex) => (
+                    <View key={tagIndex} style={styles.tag}>
+                      <Text style={styles.tagText}>{tag}</Text>
+                    </View>
+                  ))}
+                  {event.tags.slice(0, 1).map((tag, tagIndex) => (
+                    <View key={`orig-${tagIndex}`} style={styles.tag}>
+                      <Text style={styles.tagText}>{tag}</Text>
+                    </View>
+                  ))}
+                  {preferences && score > 0 && filter === 'recommended' && (
+                    <View style={styles.scoreTag}>
+                      <Text style={styles.scoreText}>{score}% match</Text>
+                    </View>
+                  )}
+                </View>
+
+                {/* Show relevant majors if classified */}
+                {event.classification && event.classification.relevantMajors.length > 0 && (
+                  <Text style={styles.majorText}>
+                    For: {event.classification.relevantMajors.slice(0, 2).join(', ')}
+                  </Text>
+                )}
+
+                {/* Capacity info */}
+                {event.capacity && (
+                  <Text style={styles.capacityText}>
+                    Capacity: {event.capacity} people
+                  </Text>
+                )}
+              </TouchableOpacity>
+            );
+          })}
           
-          {events.length === 0 && (
+          {sortedEvents.length === 0 && (
             <Text style={styles.noEventsText}>
               No events found for the selected filter.
             </Text>
@@ -151,13 +398,29 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 20,
+    marginBottom: 15,
     marginTop: 40,
   },
   header: {
-    fontSize: 28,
+    fontSize: 24,
     fontWeight: 'bold',
     color: '#003366',
+  },
+  subheader: {
+    fontSize: 13,
+    color: '#666',
+    marginTop: 2,
+  },
+  headerButtons: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  settingsButton: {
+    padding: 8,
+  },
+  settingsIcon: {
+    fontSize: 22,
   },
   logoutButtonTopRight: {
     backgroundColor: '#FFD700',
@@ -170,9 +433,39 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'bold',
   },
+  setupPrompt: {
+    marginBottom: 15,
+    padding: 16,
+    backgroundColor: '#FFF9E6',
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: '#FFD700',
+  },
+  setupPromptTitle: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#003366',
+    marginBottom: 6,
+  },
+  setupPromptText: {
+    fontSize: 13,
+    color: '#666',
+    marginBottom: 12,
+  },
+  setupButton: {
+    backgroundColor: '#FFD700',
+    paddingVertical: 10,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  setupButtonText: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#003366',
+  },
   filterContainer: {
     flexDirection: 'row',
-    marginBottom: 20,
+    marginBottom: 15,
     backgroundColor: '#E8E8E8',
     borderRadius: 25,
     padding: 4,
@@ -188,7 +481,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#003366',
   },
   filterText: {
-    fontSize: 16,
+    fontSize: 14,
     color: '#666',
     fontWeight: '500',
   },
@@ -222,6 +515,21 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 4,
     elevation: 3,
+  },
+  recommendedBadge: {
+    position: 'absolute',
+    top: 12,
+    right: 12,
+    backgroundColor: '#FFD700',
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 12,
+    zIndex: 1,
+  },
+  recommendedBadgeText: {
+    fontSize: 11,
+    fontWeight: 'bold',
+    color: '#003366',
   },
   eventHeader: {
     flexDirection: 'row',
@@ -287,6 +595,25 @@ const styles = StyleSheet.create({
     fontSize: 11,
     color: '#003366',
     fontWeight: '500',
+  },
+  scoreTag: {
+    backgroundColor: '#FFD700',
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    borderRadius: 8,
+    marginRight: 6,
+    marginBottom: 4,
+  },
+  scoreText: {
+    fontSize: 11,
+    color: '#003366',
+    fontWeight: 'bold',
+  },
+  majorText: {
+    fontSize: 12,
+    color: '#666',
+    fontStyle: 'italic',
+    marginBottom: 4,
   },
   capacityText: {
     fontSize: 12,

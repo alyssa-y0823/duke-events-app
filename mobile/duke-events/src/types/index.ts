@@ -1,3 +1,7 @@
+// src/types/index.ts
+import { ClassificationResult } from '../services/eventClassifier';
+
+// Base Event interface (keep your original)
 export interface Event {
   id: string;
   title: string;
@@ -11,6 +15,24 @@ export interface Event {
   maxAttendees?: number;
 }
 
+// Extended Event with additional fields from backend
+interface BaseEvent extends Event {
+  imageUrl?: string;
+  tags: string[];
+  capacity?: number;
+  registrationUrl?: string;
+  contactEmail?: string;
+  isRecurring: boolean;
+  organization: string;
+}
+
+// ExtendedEvent with classification (used in app)
+export interface ExtendedEvent extends BaseEvent {
+  classification?: ClassificationResult;
+  relevanceScore?: number;
+}
+
+// User types (keep your originals)
 export interface User {
   id: string;
   email: string;
@@ -26,4 +48,13 @@ export interface UserPreferences {
   timeSlots: string[];
   locations: string[];
   maxDistance: number;
+}
+
+// Simple preferences for onboarding (different from UserPreferences above)
+export interface SimpleUserPreferences {
+  year: string;
+  major: string;
+  interests: string[];
+  setupComplete: boolean;
+  createdAt?: string;
 }

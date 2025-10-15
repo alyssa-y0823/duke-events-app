@@ -7,6 +7,7 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
+  SafeAreaView,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -90,124 +91,138 @@ export default function PreferencesSetupScreen({ navigation }: PreferencesSetupS
   };
 
   return (
-    <View style={styles.container}>
-      <ScrollView style={styles.content} showsVerticalScrollIndicator={true}>
-        <View style={styles.header}>
-          <Text style={styles.title}>Welcome to Duke Events! 👋</Text>
-          <Text style={styles.subtitle}>
-            Let's personalize your experience. Tell us about yourself to get event recommendations tailored to your interests.
-          </Text>
-        </View>
-
-        {/* Year Selection */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>What year are you?</Text>
-          <View style={styles.optionsContainer}>
-            {years.map((year) => (
-              <TouchableOpacity
-                key={year}
-                style={[
-                  styles.optionButton,
-                  selectedYear === year && styles.optionButtonSelected,
-                ]}
-                onPress={() => setSelectedYear(year)}
-              >
-                <Text
-                  style={[
-                    styles.optionText,
-                    selectedYear === year && styles.optionTextSelected,
-                  ]}
-                >
-                  {year}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        </View>
-
-        {/* Major Selection */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>What's your major?</Text>
-          <View style={styles.optionsContainer}>
-            {majors.map((major) => (
-              <TouchableOpacity
-                key={major}
-                style={[
-                  styles.optionButton,
-                  selectedMajor === major && styles.optionButtonSelected,
-                ]}
-                onPress={() => setSelectedMajor(major)}
-              >
-                <Text
-                  style={[
-                    styles.optionText,
-                    selectedMajor === major && styles.optionTextSelected,
-                  ]}
-                >
-                  {major}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        </View>
-
-        {/* Interests Selection */}
-        <View style={styles.section}>
-          <Text style={styles.sectionTitle}>What interests you? (Select all that apply)</Text>
-          <View style={styles.interestsContainer}>
-            {interests.map((interest) => (
-              <TouchableOpacity
-                key={interest.id}
-                style={[
-                  styles.interestCard,
-                  selectedInterests.includes(interest.id) && styles.interestCardSelected,
-                ]}
-                onPress={() => toggleInterest(interest.id)}
-              >
-                <Text style={styles.interestIcon}>{interest.icon}</Text>
-                <Text
-                  style={[
-                    styles.interestText,
-                    selectedInterests.includes(interest.id) && styles.interestTextSelected,
-                  ]}
-                >
-                  {interest.label}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        </View>
-
-        <View style={styles.spacer} />
-      </ScrollView>
-
-      {/* Save Button */}
-      <View style={styles.footer}>
-        <TouchableOpacity
-          style={styles.saveButton}
-          onPress={handleSavePreferences}
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.container}>
+        <ScrollView 
+          style={styles.scrollView}
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={true}
+          bounces={true}
         >
-          <Text style={styles.saveButtonText}>Continue to Events</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.skipButton}
-          onPress={() => navigation.navigate('Home')}
-        >
-          <Text style={styles.skipButtonText}>Skip for now</Text>
-        </TouchableOpacity>
+          <View style={styles.header}>
+            <Text style={styles.title}>Welcome to Duke Events! 👋</Text>
+            <Text style={styles.subtitle}>
+              Let's personalize your experience. Tell us about yourself to get event recommendations tailored to your interests.
+            </Text>
+          </View>
+
+          {/* Year Selection */}
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>What year are you?</Text>
+            <View style={styles.optionsContainer}>
+              {years.map((year) => (
+                <TouchableOpacity
+                  key={year}
+                  style={[
+                    styles.optionButton,
+                    selectedYear === year && styles.optionButtonSelected,
+                  ]}
+                  onPress={() => setSelectedYear(year)}
+                >
+                  <Text
+                    style={[
+                      styles.optionText,
+                      selectedYear === year && styles.optionTextSelected,
+                    ]}
+                  >
+                    {year}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+
+          {/* Major Selection */}
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>What's your major?</Text>
+            <View style={styles.optionsContainer}>
+              {majors.map((major) => (
+                <TouchableOpacity
+                  key={major}
+                  style={[
+                    styles.optionButton,
+                    selectedMajor === major && styles.optionButtonSelected,
+                  ]}
+                  onPress={() => setSelectedMajor(major)}
+                >
+                  <Text
+                    style={[
+                      styles.optionText,
+                      selectedMajor === major && styles.optionTextSelected,
+                    ]}
+                  >
+                    {major}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+
+          {/* Interests Selection */}
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>What interests you? (Select all that apply)</Text>
+            <View style={styles.interestsContainer}>
+              {interests.map((interest) => (
+                <TouchableOpacity
+                  key={interest.id}
+                  style={[
+                    styles.interestCard,
+                    selectedInterests.includes(interest.id) && styles.interestCardSelected,
+                  ]}
+                  onPress={() => toggleInterest(interest.id)}
+                >
+                  <Text style={styles.interestIcon}>{interest.icon}</Text>
+                  <Text
+                    style={[
+                      styles.interestText,
+                      selectedInterests.includes(interest.id) && styles.interestTextSelected,
+                    ]}
+                  >
+                    {interest.label}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+
+          {/* Extra padding at bottom to ensure content is visible above buttons */}
+          <View style={styles.bottomSpacer} />
+        </ScrollView>
+
+        {/* Fixed Footer with Buttons */}
+        <View style={styles.footer}>
+          <TouchableOpacity
+            style={styles.saveButton}
+            onPress={handleSavePreferences}
+          >
+            <Text style={styles.saveButtonText}>Continue to Events</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.skipButton}
+            onPress={() => navigation.navigate('Home')}
+          >
+            <Text style={styles.skipButtonText}>Skip for now</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
     backgroundColor: '#F5F5F5',
   },
-  content: {
+  container: {
     flex: 1,
+  },
+  scrollView: {
+    flex: 1,
+  },
+  scrollContent: {
     padding: 20,
+    paddingBottom: 180, // Extra padding to ensure content scrolls above footer
   },
   header: {
     marginBottom: 30,
@@ -244,8 +259,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderWidth: 2,
     borderColor: '#E0E0E0',
-    marginRight: 10,
-    marginBottom: 10,
   },
   optionButtonSelected: {
     backgroundColor: '#003366',
@@ -272,7 +285,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderWidth: 2,
     borderColor: '#E0E0E0',
-    marginBottom: 10,
   },
   interestCardSelected: {
     backgroundColor: '#E8F4FD',
@@ -291,14 +303,27 @@ const styles = StyleSheet.create({
   interestTextSelected: {
     color: '#003366',
   },
-  spacer: {
-    height: 100,
+  bottomSpacer: {
+    height: 20,
   },
   footer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
     padding: 20,
+    paddingBottom: 30,
     backgroundColor: 'white',
     borderTopWidth: 1,
     borderTopColor: '#E0E0E0',
+    shadowColor: '#000',
+    shadowOffset: {
+      width: 0,
+      height: -2,
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 5,
   },
   saveButton: {
     backgroundColor: '#FFD700',
