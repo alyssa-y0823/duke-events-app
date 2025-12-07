@@ -1,0 +1,288 @@
+{
+  "trinity_college_arts_sciences": {
+    "departments": [
+      {
+        "name": "African & African American Studies",
+        "description": "Researchers encompass anthropologists, economists, performance artists, literary critics, political scientists, philosophers, sociologists, historians, and art historians. Explores music, cultural studies, film, performance, popular culture, gender, sexuality, race, public policy and law.",
+        "undergraduate_programs": ["Major", "Minor"],
+        "graduate_programs": ["Certificate in African and African American Studies"],
+        "concentrations": ["Americas focus", "African focus"]
+      },
+      {
+        "name": "Air Force ROTC",
+        "description": "A commissioning program for the U.S. Air Force emphasizing aerospace defense studies, leadership and management, communications skills and professional knowledge.",
+        "focus_areas": ["Air and space power", "Air Force mission organization", "Military management", "National security", "Leadership ethics"]
+      },
+      {
+        "name": "Army ROTC",
+        "description": "A commissioning program for the U.S. Army emphasizing academic scholarship, athletic ability and leadership.",
+        "focus_areas": ["Military science", "Team building", "Leadership development", "Military tactics", "Logistics", "Decision-making"]
+      },
+      {
+        "name": "Art, Art History & Visual Studies",
+        "description": "Three distinct parts: Visual Arts, Art History, and Visual & Media Studies. Engaged in international research, interdisciplinary learning, and the study of visual culture.",
+        "divisions": ["Visual Arts", "Art History", "Visual & Media Studies"]
+      },
+      {
+        "name": "Asian & Middle Eastern Studies",
+        "description": "Explores Arabic, Chinese, Hebrew, Hindi, Japanese, and Korean culture through language and literature, social movements, nationalism, diaspora, popular culture, media, gender, visuality, feminism, film theory, cinema, aesthetics, and religion.",
+        "languages_offered": ["Arabic", "Chinese", "Hebrew", "Hindi", "Japanese", "Korean", "Persian", "Sanskrit"],
+        "undergraduate_programs": ["Major", "Minor"],
+        "graduate_programs": ["M.A. in Critical Asian Humanities", "Joint graduate certificate in Middle East Studies"],
+        "concentrations": ["East Asia", "Middle East"]
+      },
+      {
+        "name": "Biology",
+        "description": "Conducts research in ecology, functional biology at cell/molecular level, functional biology at organismal level, and evolutionary biology.",
+        "undergraduate_programs": ["B.A.", "B.S.", "Minor"],
+        "concentrations": ["Anatomy, physiology & biomechanics", "Animal behavior", "Biochemistry", "Cell & molecular biology", "Ecology", "Evolutionary biology", "Genetics", "Genomics", "Marine biology", "Neurobiology", "Pharmacology", "Plant biology"]
+      },
+      {
+        "name": "Chemistry",
+        "description": "Research programs focus on chemical biology, nanomaterials, energy science, theoretical/computational chemistry, and molecular and biomolecular imaging.",
+        "research_areas": ["Chemical biology", "Nanomaterials", "Energy science", "Theoretical/computational chemistry", "Molecular and biomolecular imaging"],
+        "graduate_programs": ["Ph.D."]
+      },
+      {
+        "name": "Classical Studies",
+        "description": "Explores languages (ancient Greek and Latin), literatures, archaeology, art history, and histories of Greco-Roman antiquity from 3000 BCE to 900 CE.",
+        "research_areas": ["Archaeology and Visual Studies", "History and Historiography", "Language and Literature"],
+        "time_period": "3000 BCE to 900 CE",
+        "geographic_scope": "From the Nile to the North Sea, from Britain to Bactria"
+      },
+      {
+        "name": "Computer Science",
+        "description": "Top 25 department emphasizing geometric computing, internet systems, networking & security, memory systems, biological computing, and learning & modeling.",
+        "undergraduate_programs": ["B.S.", "B.A.", "Minor in Computer Science", "Minor in Computational Biology and Bioinformatics"],
+        "graduate_programs": ["Ph.D.", "M.S. in Computer Science", "M.S. in Economics and Computation"]
+      },
+      {
+        "name": "Cultural Anthropology",
+        "description": "Top program exploring globalization, diaspora, popular culture, mass media, nationalism, identity, race, sexuality, and politics of tradition and modernity.",
+        "undergraduate_programs": ["Major", "Minor"],
+        "graduate_programs": ["Ph.D."],
+        "research_approaches": ["Postcolonial and Marxist theory", "Feminist and critical race theory", "Psychoanalysis and psychology", "Political ecology", "Science and technology"]
+      },
+      {
+        "name": "Dance",
+        "description": "Internationally-recognized choreographers, scholars, teachers and performers offering high-caliber dance training and scholarship.",
+        "areas_of_expertise": ["African American and Afro-Caribbean dance", "Classical and contemporary Indian dance", "Ballet and modern dance", "Post-modern and contemporary choreography"],
+        "research_topics": ["Age and dance artistry", "Gender in performance", "Performance and social change", "Embodied spirituality"],
+        "study_concentrations": 3
+      },
+      {
+        "name": "Economics",
+        "description": "Rapidly approaching top ten programs nationally. Broadly focused on econometrics, micro- and macro-economic theory, and applied economics.",
+        "undergraduate_programs": ["B.S.", "B.A.", "Minor in Economics", "Minor in Finance", "Finance concentration"],
+        "graduate_programs": ["M.A. in Economics", "M.A. in Analytical Political Economy", "M.S. in Economics and Computation", "M.S. in Statistical and Economic Modeling", "Ph.D."]
+      },
+      {
+        "name": "Education",
+        "description": "Accredited program offering teacher certification and preparation programs.",
+        "undergraduate_programs": ["Minor in Education", "Elementary teacher preparation", "Secondary teacher preparation"],
+        "graduate_programs": ["Master of Arts in Teaching (MAT)"],
+        "additional_programs": ["Academically/Intellectually Gifted add-on licensure"]
+      },
+      {
+        "name": "English",
+        "description": "Top ten English department working in different historical periods and national political contexts.",
+        "undergraduate_programs": ["Major", "Minor in English", "Minor in Creative Writing"],
+        "graduate_programs": ["Ph.D. in English", "Joint Juris Doctor/Master of Arts"],
+        "research_areas": ["Medieval studies", "18th century literature", "Romantic poetry", "Victorian literature", "African American literature and culture", "American literature", "Modernist and post-colonial studies", "Creative writing"]
+      },
+      {
+        "name": "Evolutionary Anthropology",
+        "description": "Focuses on understanding non-human primate and human biology in an evolutionary context.",
+        "research_areas": ["Evolutionary medicine", "Functional morphology", "Paleontology", "Primate behavior & ecology", "Primate cognition/human cognitive evolution", "Systematics & comparative methods"],
+        "undergraduate_programs": ["Major", "Minor"],
+        "graduate_programs": ["Ph.D."]
+      },
+      {
+        "name": "Gender, Sexuality & Feminist Studies",
+        "description": "Explores gender identities, relations, practices, theories and institutions.",
+        "undergraduate_programs": ["Major", "Minor"],
+        "graduate_programs": ["Graduate certificate in Feminist Studies"],
+        "research_themes": ["Intersectionality of gender, race and class", "Sexuality and reproductive ethics", "Food politics", "Women's writing", "Feminism in contemporary art", "Ecofeminism", "Ethics and human rights"]
+      },
+      {
+        "name": "German Studies",
+        "description": "Research spans German ethics, intellectual history, theory, philosophy, literary history and criticism, and cultural studies.",
+        "undergraduate_programs": ["Major", "Minor"],
+        "graduate_programs": ["Joint PhD with UNC-Chapel Hill"],
+        "additional_programs": ["Duke in Berlin global education program"]
+      },
+      {
+        "name": "Health, Wellness & Physical Education",
+        "description": "Provides academic opportunities through activity and lecture-based theory classes.",
+        "course_types": ["Activity courses", "Lecture-based theory courses"]
+      },
+      {
+        "name": "History",
+        "description": "Among the top programs nationally with extensive regional and thematic specializations.",
+        "undergraduate_programs": ["Major", "Minor"],
+        "graduate_programs": ["Ph.D."],
+        "research_areas": ["Intellectual history", "Legal history", "Medical history", "Military history", "Politics and governance", "Labor history", "Gender, race and ethnicity", "Global transnational history", "Religion and social movements"],
+        "regional_specializations": ["Early North America", "Antebellum U.S.", "Modern America", "Afro-America", "American South", "Latin America", "Africa", "Europe", "British Empire", "South Asia", "Japan", "China", "Russia", "French Caribbean", "Atlantic World"]
+      },
+      {
+        "name": "International Comparative Studies",
+        "description": "Helps students create coherent programs emphasizing critical transnationalism through interdisciplinary coursework.",
+        "focus_areas": ["Regional studies", "Culture", "History", "Politics", "Language"]
+      },
+      {
+        "name": "Linguistics",
+        "description": "Unique inter-disciplinary program offering undergraduate education that is both deep and broad.",
+        "undergraduate_programs": ["Major", "Minor", "Honors thesis supervision"],
+        "research_strengths": ["Neurolinguistics", "Historical linguistics", "Sociolinguistics", "Language and politics"]
+      },
+      {
+        "name": "Literature",
+        "description": "National leader in theory, philosophy and politics of literature and media within a global and postcolonial framework.",
+        "undergraduate_programs": ["Global Cultural Studies degree"],
+        "graduate_programs": ["Ph.D. in Literature"],
+        "research_areas": ["Philosophy, literature & aesthetics", "Film & new media", "Critical race theory", "Feminisms, gender & sexuality", "Globalization & post coloniality", "Marxism & critical theory", "Modernism & modernity", "Psychoanalysis", "Science studies"]
+      },
+      {
+        "name": "Mathematics",
+        "description": "Research spans theoretical to applied mathematics. Top 20 for pure mathematics, top 15 for applied mathematics.",
+        "undergraduate_programs": ["B.A.", "B.S.", "Minor"],
+        "graduate_programs": ["Ph.D."],
+        "research_areas": ["Algebra and combinatorics", "Analysis", "Biological modeling", "Computational mathematics", "Differential & algebraic geometry", "Mathematical physics", "Number theory", "PDE & dynamical systems", "Physical modeling", "Probability", "Signals, images and data", "Topology"]
+      },
+      {
+        "name": "Music",
+        "description": "Faculty includes musicologists, composers, ethnomusicologists, and performers.",
+        "undergraduate_programs": ["Major", "Minor"],
+        "graduate_programs": ["Ph.D. in Composition", "Ph.D. in Ethnomusicology", "Ph.D. in Musicology"],
+        "concentrations": ["Performance"],
+        "specializations": ["American vernacular music", "Jazz", "17th-century Italian music", "19th-century German music", "20th-century British music", "Iberian keyboard music", "French musical culture", "Theater and film", "South African Ngoma", "Sound studies"]
+      },
+      {
+        "name": "Navy ROTC",
+        "description": "A commissioning program for the U.S. Navy emphasizing naval science, physical competence, and leadership.",
+        "focus_areas": ["Naval orientation", "Seapower and maritime affairs", "Naval leadership", "Naval ship systems", "Navigation", "Naval operations", "Naval tactical systems"]
+      },
+      {
+        "name": "Philosophy",
+        "description": "Strong faculty committed to excellence in research and teaching with particular strengths in several areas.",
+        "undergraduate_programs": ["Major", "Minor"],
+        "graduate_programs": ["Ph.D.", "Joint Juris Doctor/Master of Arts"],
+        "areas_of_strength": ["Philosophy of biology", "Philosophy of mind", "Political philosophy", "Applied ethics", "Philosophy of social science", "17th- and 18th-Century philosophy", "Chinese philosophy"],
+        "additional_areas": ["Ancient philosophy", "Kant", "20th-Century analytic philosophy", "History and philosophy of science", "Cognitive science", "Moral psychology", "Normative ethics", "Philosophy of law", "Metaphysics", "Epistemology", "Philosophy of language", "Philosophical logic"]
+      },
+      {
+        "name": "Physics",
+        "description": "Research ranges from astrophysics to condensed matter physics. Top 6 for nuclear physics, top 30 for physics.",
+        "undergraduate_programs": ["Physics degree", "Biophysics degree"],
+        "graduate_programs": ["Ph.D."],
+        "research_areas": ["Astrophysics", "Condensed matter physics", "Nanoscale materials", "Non-linear and complex systems", "Biological physics", "High-energy physics", "Experimental nuclear physics", "Theoretical nuclear and particle physics", "Geometric and theoretical physics", "Experimental quantum optical physics"]
+      },
+      {
+        "name": "Political Science",
+        "description": "Among top ten programs nationally for many years.",
+        "undergraduate_programs": ["B.S.", "Minor"],
+        "graduate_programs": ["M.A.", "Ph.D.", "M.A. in Analytical Political Economy", "Joint M.A./Juris Doctor"],
+        "affiliated_certificates": ["Philosophy, Politics & Economics", "Decision Sciences"],
+        "research_areas": ["Normative political theory & philosophy", "Political behavior & identities", "Political economy", "Political institutions", "Political methodology", "Security, peace & conflict"]
+      },
+      {
+        "name": "Psychology & Neuroscience",
+        "description": "Internationally known for leadership in cognitive science and clinical psychology.",
+        "undergraduate_programs": ["Major in Psychology", "Minor in Psychology", "Major in Neuroscience", "Minor in Neuroscience"],
+        "graduate_programs": ["PhD Program in Psychology and Neuroscience"],
+        "research_areas": ["Developmental psychology", "Social and personality psychology", "Cognitive psychology", "Cognitive neuroscience", "Systems and integrative neuroscience"],
+        "research_topics": ["Decision-making", "Self-concept and self-regulation", "PTSD", "Health and behavior", "Achievement and motivation", "Emotional memory", "Language acquisition", "Visual perception"]
+      },
+      {
+        "name": "Religious Studies",
+        "description": "Very distinguished nationally, exploring social organization and impact of religion in ancient and modern cultures.",
+        "undergraduate_programs": ["Major"],
+        "graduate_programs": ["M.A. in Religion", "Graduate Program in Religion (with Divinity School)"],
+        "areas_of_expertise": ["Hebrew Bible", "New Testament", "Late Antiquity", "Islam", "Buddhism", "Hinduism", "American religious landscape", "Religion in culture, law and contemporary thought"]
+      },
+      {
+        "name": "Romance Studies",
+        "description": "National leader for integrating study of literature and language, covering Spanish, French, Portuguese, and Italian cultures.",
+        "undergraduate_majors": ["Brazilian & Global Portuguese", "French & Francophone Studies", "Italian Studies", "Romance Studies", "Spanish, Latin American, and Latino/a Studies"],
+        "undergraduate_minors": ["Brazilian & Global Portuguese", "French Studies", "Italian Studies", "Spanish Studies"],
+        "graduate_programs": ["Ph.D. in Romance Studies", "Joint Juris Doctor/M.A."],
+        "phd_tracks": ["French & Francophone Studies", "Italian Studies", "Romance Studies", "Spanish & Latin American Studies"],
+        "affiliated_certificates": ["Latin American Studies", "Latino/a Studies in the Global South"]
+      },
+      {
+        "name": "Slavic & Eurasian Studies",
+        "description": "Explores cultures and histories of Russia and Central/Eastern Europe.",
+        "regions_covered": ["Russia", "Bosnia", "Czechia", "Hungary", "Poland", "Romania", "Slovakia"],
+        "research_topics": ["Russian language, literature, film, translation", "Polish language, literature, film, popular culture", "Cognition and culture", "Semiotics", "Gender", "Medical humanities", "Death studies", "Imperial studies", "Gulag studies", "Islamic studies", "Jewish studies in Eastern Europe", "Power and politics"]
+      },
+      {
+        "name": "Sociology",
+        "description": "Ranked among top 12 and rapidly approaching top ten programs.",
+        "undergraduate_programs": ["Major", "Minor"],
+        "graduate_programs": ["Ph.D."],
+        "research_areas": ["Comparative and historical sociology", "Population studies", "Medical and economic sociology", "Social stratification", "Sociology of morality and religion"]
+      },
+      {
+        "name": "Statistical Science",
+        "description": "Top 10 program and premier Bayesian statistics program in the world.",
+        "undergraduate_programs": ["B.A./B.S.", "Minor", "Interdepartmental major in data science"],
+        "graduate_programs": ["M.S. in Statistical Science", "Ph.D. in Statistical Science"],
+        "focus": "Leading the data and computational revolution"
+      },
+      {
+        "name": "Theater Studies",
+        "description": "Combines study of history, theory of theater, performance and dramatic literature with development of new works and new media integration.",
+        "undergraduate_programs": ["Major", "Minor"],
+        "research_areas": ["Set and lighting design", "Directing", "Playwriting", "TV writing", "Dramatic literature", "Acting and puppetry", "Performance and film studies", "Literary and cultural criticism", "Theater history"],
+        "specializations": ["Chinese theater", "Russian theater", "British and American theater"]
+      },
+      {
+        "name": "Thompson Writing Program",
+        "description": "Ranked among top five writing programs in the country, exploring impacts of written, oral, and digital rhetoric.",
+        "undergraduate_offerings": "Courses in written, verbal, and digital communication",
+        "graduate_offerings": "Courses and programming for writing excellence and teaching",
+        "additional_programs": ["Writing-in-the-Disciplines program", "TWP Faculty Write Program", "TWP Writing Studio"]
+      }
+    ]
+  },
+  "engineering_majors": {
+    "majors": [
+      {
+        "name": "Biomedical Engineering",
+        "description": "Take on societally critical challenges in biology and health care, including the design of medical technology.",
+        "study_areas": ["Imaging and instrumentation", "Tissue engineering"],
+        "double_major_options": ["Civil Engineering", "Environmental Engineering", "Electrical and Computer Engineering", "Mechanical Engineering", "Computer Science"]
+      },
+      {
+        "name": "Civil Engineering",
+        "description": "Lead the Fifth Industrial Revolution—designing solutions aimed at broadly-shared well-being, for people and the planet.",
+        "study_areas": ["Structural engineering and mechanics", "Environmental engineering and water resources"],
+        "double_major_options": ["Biomedical Engineering"]
+      },
+      {
+        "name": "Electrical & Computer Engineering",
+        "description": "Integrate computing and electronic knowledge with design skill to create new devices and software.",
+        "study_areas": ["Computer engineering and digital systems", "Solid-state devices and integrated circuits"],
+        "minors": ["Artificial Intelligence & Machine Learning", "Software Engineering"]
+      },
+      {
+        "name": "Environmental Engineering",
+        "description": "Develop systems and structures that restore and protect the planet's air, water and soil.",
+        "study_areas": ["Water resources engineering", "Biotechnology and bioremediation"],
+        "double_major_options": ["Biomedical Engineering"]
+      },
+      {
+        "name": "Mechanical Engineering",
+        "description": "Invent machines that improve lives, in fields as varied as health care, manufacturing, energy and transportation.",
+        "study_areas": ["Mechatronics", "Mechanical design"],
+        "double_major_options": ["Biomedical Engineering"]
+      },
+      {
+        "name": "IDEAS",
+        "full_name": "Interdisciplinary Engineering & Applied Science",
+        "description": "Explore a topic important to you through a customized major—pick a pre-approved template or propose your own.",
+        "type": "Interdisciplinary option"
+      }
+    ]
+  }
+}
