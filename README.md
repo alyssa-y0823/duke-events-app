@@ -1,4 +1,4 @@
-# Duke Events & Ranking System
+# Duke Events Matching
 
 A relevance-based event recommendation system for Duke University students, replacing chronological sorting with personalized ranking.
 
