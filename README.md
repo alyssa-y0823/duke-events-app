@@ -30,8 +30,8 @@ This project transforms the native Duke Events application into a personalized d
     -   On the Home Screen, slide the "Prioritize" slider to "Relevance" to see the ranking algorithm in action.
 
 ## Video Links
--   **Demo Video**: [See videos/demo.mp4](videos/demo.mp4) (Placeholder)
--   **Technical Walkthrough**: [See videos/walkthrough.mp4](videos/walkthrough.mp4) (Placeholder)
+-   **Demo Video**: https://duke.zoom.us/rec/share/AsEz4URURQUZQkI51p9VWa7kl90TXIqr1FJ4UUuV5o951z3lR38za50Ieh5b2Hfu.9JB66oDlatFkRRmX
+-   **Technical Walkthrough**: 
 
 ## Evaluation
 We evaluated the ranking system using unit tests and qualitative manual verification.
