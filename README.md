@@ -1,4 +1,4 @@
-# Duke Events & Ranking System
+# Duke Events Matcher
 
 A relevance-based event recommendation system for Duke University students, replacing chronological sorting with personalized ranking.
 
@@ -38,7 +38,3 @@ We evaluated the ranking system using unit tests and qualitative manual verifica
 -   **Quantitative**: Unit tests in `src/ranking/tests` confirm the scoring arithmetic. For a user profile interested in "tech", events with "robotics" tags consistently score higher (>0.5) than unrelated events (<0.2).
 -   **Qualitative**: RAG integration significantly improves relevance for broad major names. For example, a "Biology" major now matches events mentioning "ecology" or "genome" even if the word "biology" isn't explicitly present, thanks to the augmented context from `majors.json`.
 -   **Performance**: The FAISS/embedding lookup is efficient (<100ms) for the current event volume.
-
-## Individual Contributions
--   **Alyssa (User)**: Project architecture, API design, RAG data integration, and frontend implementation.
--   **Antigravity (AI)**: Assisted with Python ranking logic (embeddings, scoring), React Native UI components, and unit testing.

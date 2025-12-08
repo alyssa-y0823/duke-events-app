@@ -1,8 +1,5 @@
 # Attribution
 
-## AI-Generated Code
-- **Ranking Logic**: The semantic scoring algorithm and FAISS integration logic in `src/ranking/scorer.py` and `src/ranking/indexer.py` were assisted by AI.
-
 ## External Libraries
 - **Sentence-Transformers**: Used for generating semantic embeddings (`all-MiniLM-L6-v2` model). [Documentation](https://www.sbert.net/)
 - **FAISS (Facebook AI Similarity Search)**: Used for efficient similarity search. [GitHub](https://github.com/facebookresearch/faiss)
