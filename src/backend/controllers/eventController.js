@@ -94,7 +94,7 @@ exports.rankEvents = async (req, res) => {
     const events = await fetchDukeEvents(futureDays);
 
     try {
-      const rankingResponse = await fetch('http://localhost:5000/rank', {
+      const rankingResponse = await fetch('http://localhost:5001/rank', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

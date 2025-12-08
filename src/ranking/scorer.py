@@ -5,8 +5,12 @@ def calculate_recency_score(event_time_str):
     try:
         if isinstance(event_time_str, str):
             event_date = datetime.fromisoformat(event_time_str.replace('Z', '+00:00'))
+        elif isinstance(event_time_str, (int, float)):
+            # Assume UTC timestamp
+            from datetime import timezone
+            event_date = datetime.fromtimestamp(event_time_str, tz=timezone.utc)
         else:
-            event_date = event_time_str
+            return 0.0
             
         now = datetime.now(event_date.tzinfo)
         delta = event_date - now

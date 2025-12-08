@@ -20,8 +20,8 @@ The ranking service provides the core relevance logic (embeddings, scoring).
     ```bash
     python app.py
     ```
-    - Runs on: `http://localhost:5000`
-    - Verify: `curl http://localhost:5000/health`
+    - Runs on: `http://localhost:5001`
+    - Verify: `curl http://localhost:5001/health`
 
 ## 2. Backend (Node.js)
 The backend proxies requests and handles the calendar API.

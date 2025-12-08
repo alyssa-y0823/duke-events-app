@@ -4,10 +4,11 @@ import {
   View,
   Text,
   StyleSheet,
-  ScrollView,
   TouchableOpacity,
   ActivityIndicator,
-  RefreshControl
+  RefreshControl,
+  FlatList,
+  SafeAreaView
 } from 'react-native';
 import Slider from '@react-native-community/slider';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -236,9 +237,9 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
   const sortedEvents = getSortedEvents();
 
   return (
-    <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.headerContainer}>
+    <SafeAreaView style={styles.container}>
+      {/* Header and Controls */}
+      < View style={styles.headerContainer} >
         <View>
           <Text style={styles.header}>
             Duke Events {preferences ? `• ${preferences.year}` : ''}
@@ -262,23 +263,25 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
             <Text style={styles.logoutTextTopRight}>Logout</Text>
           </TouchableOpacity>
         </View>
-      </View>
+      </View >
 
       {/* Preferences Setup Prompt */}
-      {!preferences && (
-        <View style={styles.setupPrompt}>
-          <Text style={styles.setupPromptTitle}>🎯 Get AI-Powered Recommendations</Text>
-          <Text style={styles.setupPromptText}>
-            Set up your preferences and we'll use AI to find the perfect events for you!
-          </Text>
-          <TouchableOpacity
-            style={styles.setupButton}
-            onPress={() => navigation.navigate('Preferences')}
-          >
-            <Text style={styles.setupButtonText}>Set Up Now</Text>
-          </TouchableOpacity>
-        </View>
-      )}
+      {
+        !preferences && (
+          <View style={styles.setupPrompt}>
+            <Text style={styles.setupPromptTitle}>🎯 Get AI-Powered Recommendations</Text>
+            <Text style={styles.setupPromptText}>
+              Set up your preferences and we'll use AI to find the perfect events for you!
+            </Text>
+            <TouchableOpacity
+              style={styles.setupButton}
+              onPress={() => navigation.navigate('Preferences')}
+            >
+              <Text style={styles.setupButtonText}>Set Up Now</Text>
+            </TouchableOpacity>
+          </View>
+        )
+      }
 
       {/* Filter buttons */}
       <View style={styles.filterContainer}>
@@ -310,100 +313,99 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         </TouchableOpacity>
       </View>
 
-      {loading ? (
-        <View style={styles.loadingContainer}>
-          <ActivityIndicator size="large" color="#003366" />
-          <Text style={styles.loadingText}>Loading events...</Text>
-        </View>
-      ) : (
-        <ScrollView
-          style={styles.eventsList}
-          contentContainerStyle={{ paddingBottom: 20 }}
-          showsVerticalScrollIndicator={true}
-          refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-          }
-        >
-          {sortedEvents.map((event, index) => {
-            const score = event.relevanceScore || 0;
-            const isHighlyRelevant = score >= 40;
+      {/* Event List */}
+      {
+        loading ? (
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size="large" color="#003366" />
+            <Text style={styles.loadingText}>Loading events...</Text>
+          </View>
+        ) : (
+          <FlatList
+            style={styles.eventsList}
+            contentContainerStyle={{ paddingBottom: 20 }}
+            data={sortedEvents}
+            keyExtractor={(item, index) => item.id && item.id !== '-1' ? item.id : `event-${index}`}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
+            ListEmptyComponent={
+              <Text style={styles.noEventsText}>No events found for the selected filter.</Text>
+            }
+            renderItem={({ item: event }) => {
+              const score = event.relevanceScore || 0;
+              const isHighlyRelevant = score >= 40;
 
-            return (
-              <TouchableOpacity
-                key={event.id && event.id !== '-1' ? event.id : `event-${index}`}
-                onPress={() => navigation.navigate('EventDetail', { event })}
-                style={styles.eventCard}
-              >
-                {/* Recommended Badge */}
-                {isHighlyRelevant && filter === 'recommended' && (
-                  <View style={styles.recommendedBadge}>
-                    <Text style={styles.recommendedBadgeText}>⭐ Recommended</Text>
-                  </View>
-                )}
-
-                <View style={styles.eventHeader}>
-                  <Text style={styles.eventTitle}>{event.title}</Text>
-                  <Text style={styles.eventCategory}>{event.category}</Text>
-                </View>
-
-                <Text style={styles.eventDescription} numberOfLines={2}>
-                  {event.description}
-                </Text>
-
-                <View style={styles.eventDetails}>
-                  <Text style={styles.eventTime}>
-                    {formatDate(event.date)} • {event.time}
-                  </Text>
-                  <Text style={styles.eventLocation}>
-                    {typeof event.location === 'string' ? event.location : event.location || 'Location TBD'}
-                  </Text>
-                  <Text style={styles.eventOrganization}>{event.organization}</Text>
-                </View>
-
-                {/* Tags and Classification Info */}
-                <View style={styles.tagsContainer}>
-                  {event.classification?.enhancedTags.slice(0, 2).map((tag, tagIndex) => (
-                    <View key={tagIndex} style={styles.tag}>
-                      <Text style={styles.tagText}>{tag}</Text>
-                    </View>
-                  ))}
-                  {event.tags.slice(0, 1).map((tag, tagIndex) => (
-                    <View key={`orig-${tagIndex}`} style={styles.tag}>
-                      <Text style={styles.tagText}>{tag}</Text>
-                    </View>
-                  ))}
-                  {preferences && score > 0 && filter === 'recommended' && (
-                    <View style={styles.scoreTag}>
-                      <Text style={styles.scoreText}>{score}% match</Text>
+              return (
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('EventDetail', { event })}
+                  style={styles.eventCard}
+                >
+                  {/* Recommended Badge */}
+                  {isHighlyRelevant && filter === 'recommended' && (
+                    <View style={styles.recommendedBadge}>
+                      <Text style={styles.recommendedBadgeText}>⭐ Recommended</Text>
                     </View>
                   )}
-                </View>
 
-                {/* Show relevant majors if classified */}
-                {event.classification && event.classification.relevantMajors.length > 0 && (
-                  <Text style={styles.majorText}>
-                    For: {event.classification.relevantMajors.slice(0, 2).join(', ')}
+                  <View style={styles.eventHeader}>
+                    <Text style={styles.eventTitle}>{event.title}</Text>
+                    <Text style={styles.eventCategory}>{event.category}</Text>
+                  </View>
+
+                  <Text style={styles.eventDescription} numberOfLines={2}>
+                    {event.description}
                   </Text>
-                )}
 
-                {/* Capacity info */}
-                {event.capacity && (
-                  <Text style={styles.capacityText}>
-                    Capacity: {event.capacity} people
-                  </Text>
-                )}
-              </TouchableOpacity>
-            );
-          })}
+                  <View style={styles.eventDetails}>
+                    <Text style={styles.eventTime}>
+                      {formatDate(event.date)} • {event.time}
+                    </Text>
+                    <Text style={styles.eventLocation}>
+                      {typeof event.location === 'string' ? event.location : event.location || 'Location TBD'}
+                    </Text>
+                    <Text style={styles.eventOrganization}>{event.organization}</Text>
+                  </View>
 
-          {sortedEvents.length === 0 && (
-            <Text style={styles.noEventsText}>
-              No events found for the selected filter.
-            </Text>
-          )}
-        </ScrollView>
-      )}
-    </View>
+                  {/* Tags and Classification Info */}
+                  <View style={styles.tagsContainer}>
+                    {event.classification?.enhancedTags.slice(0, 2).map((tag, tagIndex) => (
+                      <View key={tagIndex} style={styles.tag}>
+                        <Text style={styles.tagText}>{tag}</Text>
+                      </View>
+                    ))}
+                    {event.tags.slice(0, 1).map((tag, tagIndex) => (
+                      <View key={`orig-${tagIndex}`} style={styles.tag}>
+                        <Text style={styles.tagText}>{tag}</Text>
+                      </View>
+                    ))}
+                    {preferences && score > 0 && filter === 'recommended' && (
+                      <View style={styles.scoreTag}>
+                        <Text style={styles.scoreText}>{score}% match</Text>
+                      </View>
+                    )}
+                  </View>
+
+                  {/* Show relevant majors if classified */}
+                  {event.classification && event.classification.relevantMajors.length > 0 && (
+                    <Text style={styles.majorText}>
+                      For: {event.classification.relevantMajors.slice(0, 2).join(', ')}
+                    </Text>
+                  )}
+
+                  {/* Capacity info */}
+                  {event.capacity && (
+                    <Text style={styles.capacityText}>
+                      Capacity: {event.capacity} people
+                    </Text>
+                  )}
+                </TouchableOpacity>
+              );
+            }}
+          />
+        )
+      }
+    </SafeAreaView >
   );
 }
 
@@ -519,7 +521,6 @@ const styles = StyleSheet.create({
   },
   eventsList: {
     flex: 1,
-    maxHeight: 600,
   },
   eventCard: {
     backgroundColor: 'white',
