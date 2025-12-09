@@ -31,7 +31,7 @@ This project transforms the native Duke Events application into a personalized d
 
 ## Video Links
 -   **Demo Video**: https://duke.zoom.us/rec/share/AsEz4URURQUZQkI51p9VWa7kl90TXIqr1FJ4UUuV5o951z3lR38za50Ieh5b2Hfu.9JB66oDlatFkRRmX
--   **Technical Walkthrough**: 
+-   **Technical Walkthrough**: https://www.canva.com/design/DAG6_u4W29s/1G6U9yp6naZncTd3ZmBFxA/watch?utm_content=DAG6_u4W29s&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h87119ac0a8
 
 ## Evaluation
 We evaluated the ranking system using unit tests and qualitative manual verification.

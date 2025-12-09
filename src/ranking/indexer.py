@@ -5,7 +5,7 @@ class EventIndexer:
     def __init__(self, dimension=384):
         # get index through inner product (cosine similarity bc vectors are normalized)
         self.index = faiss.IndexFlatIP(dimension)
-        self.event_ids = []
+        self.event_ids = [] # map faiss index to event ids
 
     def build_index(self, embeddings, event_ids):
         self.event_ids = event_ids

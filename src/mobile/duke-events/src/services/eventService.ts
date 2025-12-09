@@ -1,7 +1,6 @@
-// src/services/eventService.ts
 import { ExtendedEvent } from '../types';
 
-// API function to fetch events from JSON backend
+// api function to fetch events from json backend
 export const eventsData = async (days = 30): Promise<any[]> => {
   try {
     const response = await fetch(`http://localhost:3000/events?future_days=${days}`);
@@ -17,7 +16,7 @@ export const eventsData = async (days = 30): Promise<any[]> => {
   }
 };
 
-// Convert JSON backend response to app format
+// convert json backend response to app format
 const convertJsonEvent = (event: any): ExtendedEvent => {
   return {
     id: event.id || event.guid || `json-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`,
@@ -36,7 +35,6 @@ const convertJsonEvent = (event: any): ExtendedEvent => {
     contactEmail: event.contact?.email,
     isRecurring: false,
     organization: event.sponsor || 'Duke University',
-    // These will be added later by classifier
     classification: undefined,
     relevanceScore: undefined,
   };
@@ -225,3 +223,5 @@ export class EventService {
 }
 
 export const eventService = EventService.getInstance();
+
+export { ExtendedEvent };

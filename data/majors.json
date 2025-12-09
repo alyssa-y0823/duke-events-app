@@ -1,287 +1,229 @@
 {
   "trinity_college_arts_sciences": {
-    "departments": [
+    "programs": [
       {
-        "name": "African & African American Studies",
-        "description": "Researchers encompass anthropologists, economists, performance artists, literary critics, political scientists, philosophers, sociologists, historians, and art historians. Explores music, cultural studies, film, performance, popular culture, gender, sexuality, race, public policy and law.",
-        "undergraduate_programs": ["Major", "Minor"],
-        "graduate_programs": ["Certificate in African and African American Studies"],
-        "concentrations": ["Americas focus", "African focus"]
+        "major": "African & African American Studies",
+        "description": "Researchers encompass anthropologists, economists, performance artists, literary critics, political scientists, philosophers, sociologists, historians, and art historians who explore music, cultural studies, film, performance, popular culture, gender, sexuality, race, public policy and law to reveal the experiences and perspectives of those of African descent."
       },
       {
-        "name": "Air Force ROTC",
-        "description": "A commissioning program for the U.S. Air Force emphasizing aerospace defense studies, leadership and management, communications skills and professional knowledge.",
-        "focus_areas": ["Air and space power", "Air Force mission organization", "Military management", "National security", "Leadership ethics"]
+        "major": "Art History",
+        "description": "Part of Art, Art History & Visual Studies department with focus on international research and interdisciplinary learning. Engaged in the study of visual culture across geographic and historical categories, experienced through the perspectives of theory and practice, methodology and criticism, and digital technologies."
       },
       {
-        "name": "Army ROTC",
-        "description": "A commissioning program for the U.S. Army emphasizing academic scholarship, athletic ability and leadership.",
-        "focus_areas": ["Military science", "Team building", "Leadership development", "Military tactics", "Logistics", "Decision-making"]
+        "major": "Asian & Middle Eastern Studies",
+        "description": "Explores Arabic, Chinese, Hebrew, Hindi, Japanese, and Korean culture through the lens of language and literature, social movements, nationalism and diaspora, popular culture and the media, gender, visuality and feminism, film theory, cinema and aesthetics, and the implications of religion on identity and globalization. Offers language programs in Arabic, Chinese, Hebrew, Hindi, Japanese, Korean, Persian and Sanskrit. Concentrations available in East Asia or the Middle East."
       },
       {
-        "name": "Art, Art History & Visual Studies",
-        "description": "Three distinct parts: Visual Arts, Art History, and Visual & Media Studies. Engaged in international research, interdisciplinary learning, and the study of visual culture.",
-        "divisions": ["Visual Arts", "Art History", "Visual & Media Studies"]
+        "major": "Biology",
+        "description": "Conducts research in ecology (including behavioral ecology, population biology, community ecology, physiological ecology, ecosystem analysis, and biogeochemistry), functional biology at the cell and molecular level, functional biology at the organismal level, and evolutionary biology. Concentrations available in anatomy, physiology & biomechanics; animal behavior; biochemistry; cell & molecular biology; ecology; evolutionary biology; genetics; genomics; marine biology; neurobiology; pharmacology; and plant biology."
       },
       {
-        "name": "Asian & Middle Eastern Studies",
-        "description": "Explores Arabic, Chinese, Hebrew, Hindi, Japanese, and Korean culture through language and literature, social movements, nationalism, diaspora, popular culture, media, gender, visuality, feminism, film theory, cinema, aesthetics, and religion.",
-        "languages_offered": ["Arabic", "Chinese", "Hebrew", "Hindi", "Japanese", "Korean", "Persian", "Sanskrit"],
-        "undergraduate_programs": ["Major", "Minor"],
-        "graduate_programs": ["M.A. in Critical Asian Humanities", "Joint graduate certificate in Middle East Studies"],
-        "concentrations": ["East Asia", "Middle East"]
+        "major": "Biophysics",
+        "description": "Interdisciplinary program combining physics and biology to understand biological systems and processes."
       },
       {
-        "name": "Biology",
-        "description": "Conducts research in ecology, functional biology at cell/molecular level, functional biology at organismal level, and evolutionary biology.",
-        "undergraduate_programs": ["B.A.", "B.S.", "Minor"],
-        "concentrations": ["Anatomy, physiology & biomechanics", "Animal behavior", "Biochemistry", "Cell & molecular biology", "Ecology", "Evolutionary biology", "Genetics", "Genomics", "Marine biology", "Neurobiology", "Pharmacology", "Plant biology"]
+        "major": "Brazilian & Global Portuguese",
+        "description": "Studies Portuguese language and explores Brazilian and Lusophone cultures, both in their countries of origin and in cultures of diaspora."
       },
       {
-        "name": "Chemistry",
-        "description": "Research programs focus on chemical biology, nanomaterials, energy science, theoretical/computational chemistry, and molecular and biomolecular imaging.",
-        "research_areas": ["Chemical biology", "Nanomaterials", "Energy science", "Theoretical/computational chemistry", "Molecular and biomolecular imaging"],
-        "graduate_programs": ["Ph.D."]
+        "major": "Chemistry",
+        "description": "Research programs focus on chemical biology, nanomaterials, energy science, theoretical/computational chemistry, and molecular and biomolecular imaging. With publications in the world's most respected journals and regular highlights in the national news media, Duke Chemistry faculty and Ph.D. students pursue cutting-edge research."
       },
       {
-        "name": "Classical Studies",
-        "description": "Explores languages (ancient Greek and Latin), literatures, archaeology, art history, and histories of Greco-Roman antiquity from 3000 BCE to 900 CE.",
-        "research_areas": ["Archaeology and Visual Studies", "History and Historiography", "Language and Literature"],
-        "time_period": "3000 BCE to 900 CE",
-        "geographic_scope": "From the Nile to the North Sea, from Britain to Bactria"
+        "major": "Classical Languages",
+        "description": "Explores the languages (ancient Greek and Latin), literatures, archaeology, art history, and histories of Greco-Roman antiquity from 3000 BCE to 900 CE, from the Nile to the North Sea, from Britain to Bactria. Research is broadly grouped in the areas of Archaeology and Visual Studies; History and Historiography; and Language and Literature."
       },
       {
-        "name": "Computer Science",
-        "description": "Top 25 department emphasizing geometric computing, internet systems, networking & security, memory systems, biological computing, and learning & modeling.",
-        "undergraduate_programs": ["B.S.", "B.A.", "Minor in Computer Science", "Minor in Computational Biology and Bioinformatics"],
-        "graduate_programs": ["Ph.D.", "M.S. in Computer Science", "M.S. in Economics and Computation"]
+        "major": "Classical Civilization",
+        "description": "Explores the languages (ancient Greek and Latin), literatures, archaeology, art history, and histories of Greco-Roman antiquity from 3000 BCE to 900 CE, from the Nile to the North Sea, from Britain to Bactria. Research is broadly grouped in the areas of Archaeology and Visual Studies; History and Historiography; and Language and Literature."
       },
       {
-        "name": "Cultural Anthropology",
-        "description": "Top program exploring globalization, diaspora, popular culture, mass media, nationalism, identity, race, sexuality, and politics of tradition and modernity.",
-        "undergraduate_programs": ["Major", "Minor"],
-        "graduate_programs": ["Ph.D."],
-        "research_approaches": ["Postcolonial and Marxist theory", "Feminist and critical race theory", "Psychoanalysis and psychology", "Political ecology", "Science and technology"]
+        "major": "Computer Science",
+        "description": "Top 25 department with emphasis on geometric computing; internet systems, networking & security; memory systems & massive data management; biological computing & nanotechnologies; and learning & modeling. Faculty research is highly interconnected with the disciplines of mathematics, statistics, engineering, nanotechnology, biology, biochemistry, medicine, economics, sociology, and the environmental sciences."
       },
       {
-        "name": "Dance",
-        "description": "Internationally-recognized choreographers, scholars, teachers and performers offering high-caliber dance training and scholarship.",
-        "areas_of_expertise": ["African American and Afro-Caribbean dance", "Classical and contemporary Indian dance", "Ballet and modern dance", "Post-modern and contemporary choreography"],
-        "research_topics": ["Age and dance artistry", "Gender in performance", "Performance and social change", "Embodied spirituality"],
-        "study_concentrations": 3
+        "major": "Cultural Anthropology",
+        "description": "Ranks among the top programs in the country. On the cutting edge of new debates about globalization and diaspora, popular culture and mass media, nationalism and identity, race and sexuality, and the politics of tradition and modernity. Doctoral program prepares students to meld grounded field research with theoretical sophistication."
       },
       {
-        "name": "Economics",
-        "description": "Rapidly approaching top ten programs nationally. Broadly focused on econometrics, micro- and macro-economic theory, and applied economics.",
-        "undergraduate_programs": ["B.S.", "B.A.", "Minor in Economics", "Minor in Finance", "Finance concentration"],
-        "graduate_programs": ["M.A. in Economics", "M.A. in Analytical Political Economy", "M.S. in Economics and Computation", "M.S. in Statistical and Economic Modeling", "Ph.D."]
+        "major": "Dance",
+        "description": "Internationally-recognized choreographers, scholars, teachers and performers offering the highest caliber dance training and scholarship in an atmosphere that fosters conscious embodied practice, critical thinking, and creative risk-taking. Expertise encompasses historical and contemporary African American and Afro-Caribbean dance, classical and contemporary Indian dance and dance theater, ballet and modern, post-modern and contemporary dance choreography and performance. Three study concentrations available."
       },
       {
-        "name": "Education",
-        "description": "Accredited program offering teacher certification and preparation programs.",
-        "undergraduate_programs": ["Minor in Education", "Elementary teacher preparation", "Secondary teacher preparation"],
-        "graduate_programs": ["Master of Arts in Teaching (MAT)"],
-        "additional_programs": ["Academically/Intellectually Gifted add-on licensure"]
+        "major": "Earth & Climate Sciences",
+        "description": "Studies the Earth's systems, climate processes, and environmental changes through interdisciplinary approaches combining geology, atmospheric science, and environmental science."
       },
       {
-        "name": "English",
-        "description": "Top ten English department working in different historical periods and national political contexts.",
-        "undergraduate_programs": ["Major", "Minor in English", "Minor in Creative Writing"],
-        "graduate_programs": ["Ph.D. in English", "Joint Juris Doctor/Master of Arts"],
-        "research_areas": ["Medieval studies", "18th century literature", "Romantic poetry", "Victorian literature", "African American literature and culture", "American literature", "Modernist and post-colonial studies", "Creative writing"]
+        "major": "Economics",
+        "description": "Rapidly approaching top ten programs nationally. Broadly focused on econometrics, micro- and macro-economic theory, and applied economics, with distinctive collaborations across these boundaries. Faculty research encompasses finance, international trade, development, public sector studies, law, business and monetary economics, with specialized scholarship focused on environmental and ecological economics, cultural, agricultural and natural resource economics, education, racial inequality, and labor and economic demography."
       },
       {
-        "name": "Evolutionary Anthropology",
-        "description": "Focuses on understanding non-human primate and human biology in an evolutionary context.",
-        "research_areas": ["Evolutionary medicine", "Functional morphology", "Paleontology", "Primate behavior & ecology", "Primate cognition/human cognitive evolution", "Systematics & comparative methods"],
-        "undergraduate_programs": ["Major", "Minor"],
-        "graduate_programs": ["Ph.D."]
+        "major": "English",
+        "description": "Ranked among the top ten English departments in the country. Faculty work in different historical periods and national political contexts, showing how various literatures in English make or fail to make a coherent world out of conflicts and contradictions. One of the strongest groups of its kind in the country, specialists in African American literature and culture work at the intersection of the arts, law, literature, and sexuality studies."
       },
       {
-        "name": "Gender, Sexuality & Feminist Studies",
-        "description": "Explores gender identities, relations, practices, theories and institutions.",
-        "undergraduate_programs": ["Major", "Minor"],
-        "graduate_programs": ["Graduate certificate in Feminist Studies"],
-        "research_themes": ["Intersectionality of gender, race and class", "Sexuality and reproductive ethics", "Food politics", "Women's writing", "Feminism in contemporary art", "Ecofeminism", "Ethics and human rights"]
+        "major": "Environmental Sciences",
+        "description": "Interdisciplinary program studying environmental systems, sustainability, and ecological processes through natural science approaches."
       },
       {
-        "name": "German Studies",
-        "description": "Research spans German ethics, intellectual history, theory, philosophy, literary history and criticism, and cultural studies.",
-        "undergraduate_programs": ["Major", "Minor"],
-        "graduate_programs": ["Joint PhD with UNC-Chapel Hill"],
-        "additional_programs": ["Duke in Berlin global education program"]
+        "major": "Environmental Sciences & Policy",
+        "description": "Combines natural and social sciences to address environmental challenges, integrating policy analysis with scientific understanding of environmental systems."
       },
       {
-        "name": "Health, Wellness & Physical Education",
-        "description": "Provides academic opportunities through activity and lecture-based theory classes.",
-        "course_types": ["Activity courses", "Lecture-based theory courses"]
+        "major": "Evolutionary Anthropology",
+        "description": "Focuses on understanding non-human primate and human biology in an evolutionary context. Research areas include evolutionary medicine; functional morphology; paleontology; primate behavior & ecology; primate cognition/human cognitive evolution; and systematics & comparative methods."
       },
       {
-        "name": "History",
-        "description": "Among the top programs nationally with extensive regional and thematic specializations.",
-        "undergraduate_programs": ["Major", "Minor"],
-        "graduate_programs": ["Ph.D."],
-        "research_areas": ["Intellectual history", "Legal history", "Medical history", "Military history", "Politics and governance", "Labor history", "Gender, race and ethnicity", "Global transnational history", "Religion and social movements"],
-        "regional_specializations": ["Early North America", "Antebellum U.S.", "Modern America", "Afro-America", "American South", "Latin America", "Africa", "Europe", "British Empire", "South Asia", "Japan", "China", "Russia", "French Caribbean", "Atlantic World"]
+        "major": "French & Francophone Studies",
+        "description": "Explores the rich traditions of French and Francophone cultures, both in France and in cultures of diaspora, including the Caribbean, Quebec, and Africa. Part of Romance Studies, a national leader for integrating the study of literature and language."
       },
       {
-        "name": "International Comparative Studies",
-        "description": "Helps students create coherent programs emphasizing critical transnationalism through interdisciplinary coursework.",
-        "focus_areas": ["Regional studies", "Culture", "History", "Politics", "Language"]
+        "major": "Gender, Sexuality, and Feminist Studies",
+        "description": "Dedicated to exploring gender identities, relations, practices, theories and institutions. Faculty scholarship encompasses historical, political, literary, philosophical, economic, representational, technological, sociological and scientific analyses. Research themes include the social impacts of the intersectionality of gender, race and class; sexuality and reproductive ethics; food politics; women's writing and feminism in contemporary art; ecofeminism, ethics and human rights."
       },
       {
-        "name": "Linguistics",
-        "description": "Unique inter-disciplinary program offering undergraduate education that is both deep and broad.",
-        "undergraduate_programs": ["Major", "Minor", "Honors thesis supervision"],
-        "research_strengths": ["Neurolinguistics", "Historical linguistics", "Sociolinguistics", "Language and politics"]
+        "major": "German",
+        "description": "Research spans German ethics, intellectual history, theory and philosophy; literary history and criticism, including analysis of memoir, medieval and 18th through 20th century literature, Holocaust literature and German poetics; and broad cultural studies of German realism, modernism, gender, and religion and secularization. Duke is known for its innovative and highly ranked joint PhD in German Studies with UNC-Chapel Hill. Administers the Duke in Berlin global education program."
       },
       {
-        "name": "Literature",
-        "description": "National leader in theory, philosophy and politics of literature and media within a global and postcolonial framework.",
-        "undergraduate_programs": ["Global Cultural Studies degree"],
-        "graduate_programs": ["Ph.D. in Literature"],
-        "research_areas": ["Philosophy, literature & aesthetics", "Film & new media", "Critical race theory", "Feminisms, gender & sexuality", "Globalization & post coloniality", "Marxism & critical theory", "Modernism & modernity", "Psychoanalysis", "Science studies"]
+        "major": "Global Cultural Studies",
+        "description": "Offered through the Literature department, which is a national leader in the theory, philosophy and politics of literature and media conceptualized within a global and postcolonial framework. Research spans philosophy, literature & aesthetics; film & new media; critical race theory; feminisms, gender & sexuality; globalization & post coloniality; and Marxism & critical theory."
       },
       {
-        "name": "Mathematics",
-        "description": "Research spans theoretical to applied mathematics. Top 20 for pure mathematics, top 15 for applied mathematics.",
-        "undergraduate_programs": ["B.A.", "B.S.", "Minor"],
-        "graduate_programs": ["Ph.D."],
-        "research_areas": ["Algebra and combinatorics", "Analysis", "Biological modeling", "Computational mathematics", "Differential & algebraic geometry", "Mathematical physics", "Number theory", "PDE & dynamical systems", "Physical modeling", "Probability", "Signals, images and data", "Topology"]
+        "major": "Global Health",
+        "description": "One of the country's first liberal arts majors in global health and first global health co-major (must be paired with another major). First offered in 2013. Emphasizes ethically informed study of health disparities, social determinants of health, and complex relationships between health and environmental, social and cultural factors. Students have combined global health with over 40 different majors, most commonly Biology (20%), Public policy (16%), Anthropology (16%), Psychology (11%), and Other (37%). Required experiential learning activity of minimum 8 weeks full-time (320 hours) before spring semester of senior year, fulfilled through DukeEngage, Bass Connections, Student Research Training Program, or independent research. Accelerated MS-GH program available for select students. DGHI offers grants up to $5,000 for independent fieldwork projects."
       },
       {
-        "name": "Music",
-        "description": "Faculty includes musicologists, composers, ethnomusicologists, and performers.",
-        "undergraduate_programs": ["Major", "Minor"],
-        "graduate_programs": ["Ph.D. in Composition", "Ph.D. in Ethnomusicology", "Ph.D. in Musicology"],
-        "concentrations": ["Performance"],
-        "specializations": ["American vernacular music", "Jazz", "17th-century Italian music", "19th-century German music", "20th-century British music", "Iberian keyboard music", "French musical culture", "Theater and film", "South African Ngoma", "Sound studies"]
+        "major": "History",
+        "description": "Among the top programs nationally. Faculty research encompasses intellectual, legal, medical and military history; politics, public life and governance; labor and working class history; gender, race and ethnicity studies; global transnational history and comparative colonial studies; religion and social movements; and an emphasis in medieval and early modern history. Regional specializations include early North America, Antebellum U.S., Modern America, Afro-America, American South, Latin America, Africa, Europe, British Empire, South Asia, Japan, China, Russia, and the French Caribbean and the Atlantic World. Thematic or geographic concentrations available."
       },
       {
-        "name": "Navy ROTC",
-        "description": "A commissioning program for the U.S. Navy emphasizing naval science, physical competence, and leadership.",
-        "focus_areas": ["Naval orientation", "Seapower and maritime affairs", "Naval leadership", "Naval ship systems", "Navigation", "Naval operations", "Naval tactical systems"]
+        "major": "Interdepartmental Major",
+        "description": "Student-originated interdepartmental major in two Trinity College departments or programs that offer a major. Students must present a written plan with signed approval from both directors of undergraduate studies to the academic dean, including a descriptive title and rationale as well as a list of courses that will be taken in both departments."
       },
       {
-        "name": "Philosophy",
-        "description": "Strong faculty committed to excellence in research and teaching with particular strengths in several areas.",
-        "undergraduate_programs": ["Major", "Minor"],
-        "graduate_programs": ["Ph.D.", "Joint Juris Doctor/Master of Arts"],
-        "areas_of_strength": ["Philosophy of biology", "Philosophy of mind", "Political philosophy", "Applied ethics", "Philosophy of social science", "17th- and 18th-Century philosophy", "Chinese philosophy"],
-        "additional_areas": ["Ancient philosophy", "Kant", "20th-Century analytic philosophy", "History and philosophy of science", "Cognitive science", "Moral psychology", "Normative ethics", "Philosophy of law", "Metaphysics", "Epistemology", "Philosophy of language", "Philosophical logic"]
+        "major": "International Comparative Studies",
+        "description": "Helps students create coherent bachelor degree programs that emphasize the study of critical transnationalism. Students engage in interdisciplinary coursework focused on regions, engage in global education programs, and integrate the fields of culture, history, politics and language."
       },
       {
-        "name": "Physics",
-        "description": "Research ranges from astrophysics to condensed matter physics. Top 6 for nuclear physics, top 30 for physics.",
-        "undergraduate_programs": ["Physics degree", "Biophysics degree"],
-        "graduate_programs": ["Ph.D."],
-        "research_areas": ["Astrophysics", "Condensed matter physics", "Nanoscale materials", "Non-linear and complex systems", "Biological physics", "High-energy physics", "Experimental nuclear physics", "Theoretical nuclear and particle physics", "Geometric and theoretical physics", "Experimental quantum optical physics"]
+        "major": "Italian & European Studies",
+        "description": "Explores Italian language, literature, culture and history. Part of Romance Studies, covering Italian cultures both in Italy and in cultures of diaspora, from Europe to the Americas."
       },
       {
-        "name": "Political Science",
-        "description": "Among top ten programs nationally for many years.",
-        "undergraduate_programs": ["B.S.", "Minor"],
-        "graduate_programs": ["M.A.", "Ph.D.", "M.A. in Analytical Political Economy", "Joint M.A./Juris Doctor"],
-        "affiliated_certificates": ["Philosophy, Politics & Economics", "Decision Sciences"],
-        "research_areas": ["Normative political theory & philosophy", "Political behavior & identities", "Political economy", "Political institutions", "Political methodology", "Security, peace & conflict"]
+        "major": "Linguistics",
+        "description": "Unique inter-disciplinary program offering undergraduate classes, majors and minors, and honors thesis supervision. Particular research and teaching strengths include language and the brain (neurolinguistics), language change (historical linguistics), language and society (sociolinguistics) and language and politics. Linguistics majors develop excellent problem-solving, pattern-recognition and critical thinking skills highly valued in the job and graduate school markets."
       },
       {
-        "name": "Psychology & Neuroscience",
-        "description": "Internationally known for leadership in cognitive science and clinical psychology.",
-        "undergraduate_programs": ["Major in Psychology", "Minor in Psychology", "Major in Neuroscience", "Minor in Neuroscience"],
-        "graduate_programs": ["PhD Program in Psychology and Neuroscience"],
-        "research_areas": ["Developmental psychology", "Social and personality psychology", "Cognitive psychology", "Cognitive neuroscience", "Systems and integrative neuroscience"],
-        "research_topics": ["Decision-making", "Self-concept and self-regulation", "PTSD", "Health and behavior", "Achievement and motivation", "Emotional memory", "Language acquisition", "Visual perception"]
+        "major": "Mathematics",
+        "description": "Research spans theoretical to applied mathematics. U.S. News ranks the department in the top 20 for pure mathematics and in the top 15 for applied mathematics. Faculty interests encompass algebra and combinatorics; analysis; biological modeling; computational mathematics; differential & algebraic geometry; mathematical physics; number theory; PDE & dynamical systems; physical modeling; probability; signals, images and data; and topology."
       },
       {
-        "name": "Religious Studies",
-        "description": "Very distinguished nationally, exploring social organization and impact of religion in ancient and modern cultures.",
-        "undergraduate_programs": ["Major"],
-        "graduate_programs": ["M.A. in Religion", "Graduate Program in Religion (with Divinity School)"],
-        "areas_of_expertise": ["Hebrew Bible", "New Testament", "Late Antiquity", "Islam", "Buddhism", "Hinduism", "American religious landscape", "Religion in culture, law and contemporary thought"]
+        "major": "Marine Science & Conservation",
+        "description": "Interdisciplinary program studying marine ecosystems, ocean sciences, and conservation strategies for marine environments."
       },
       {
-        "name": "Romance Studies",
-        "description": "National leader for integrating study of literature and language, covering Spanish, French, Portuguese, and Italian cultures.",
-        "undergraduate_majors": ["Brazilian & Global Portuguese", "French & Francophone Studies", "Italian Studies", "Romance Studies", "Spanish, Latin American, and Latino/a Studies"],
-        "undergraduate_minors": ["Brazilian & Global Portuguese", "French Studies", "Italian Studies", "Spanish Studies"],
-        "graduate_programs": ["Ph.D. in Romance Studies", "Joint Juris Doctor/M.A."],
-        "phd_tracks": ["French & Francophone Studies", "Italian Studies", "Romance Studies", "Spanish & Latin American Studies"],
-        "affiliated_certificates": ["Latin American Studies", "Latino/a Studies in the Global South"]
+        "major": "Medieval & Renaissance Studies",
+        "description": "Interdisciplinary program examining European culture, literature, art, history, and thought from approximately 500-1700 CE."
       },
       {
-        "name": "Slavic & Eurasian Studies",
-        "description": "Explores cultures and histories of Russia and Central/Eastern Europe.",
-        "regions_covered": ["Russia", "Bosnia", "Czechia", "Hungary", "Poland", "Romania", "Slovakia"],
-        "research_topics": ["Russian language, literature, film, translation", "Polish language, literature, film, popular culture", "Cognition and culture", "Semiotics", "Gender", "Medical humanities", "Death studies", "Imperial studies", "Gulag studies", "Islamic studies", "Jewish studies in Eastern Europe", "Power and politics"]
+        "major": "Music",
+        "description": "Faculty are a mixture of musicologists, composers, ethnomusicologists, and performers whose work embraces the many ways we perform, create and comprehend music. Specializations include American vernacular music, jazz, seventeenth-century Italian, nineteenth-century German, and twentieth-century British music, Iberian keyboard music, French musical culture, theater, film, and melodrama, South African Ngoma, and sound studies. Highly-regarded composition program attracts top aspiring composers globally. Ph.D. programs offered in composition, ethnomusicology and musicology."
       },
       {
-        "name": "Sociology",
-        "description": "Ranked among top 12 and rapidly approaching top ten programs.",
-        "undergraduate_programs": ["Major", "Minor"],
-        "graduate_programs": ["Ph.D."],
-        "research_areas": ["Comparative and historical sociology", "Population studies", "Medical and economic sociology", "Social stratification", "Sociology of morality and religion"]
+        "major": "Neuroscience",
+        "description": "Interdisciplinary program combining biology, psychology, chemistry, and other fields to study the nervous system and brain function. Part of the Psychology & Neuroscience department, internationally known for leadership in cognitive science."
       },
       {
-        "name": "Statistical Science",
-        "description": "Top 10 program and premier Bayesian statistics program in the world.",
-        "undergraduate_programs": ["B.A./B.S.", "Minor", "Interdepartmental major in data science"],
-        "graduate_programs": ["M.S. in Statistical Science", "Ph.D. in Statistical Science"],
-        "focus": "Leading the data and computational revolution"
+        "major": "Philosophy",
+        "description": "Strong faculty committed to excellence in research and teaching. Recognized for particular strength in philosophy of biology (rated as one of the two top programs), philosophy of mind, political philosophy, applied ethics, philosophy of social science, 17th- and 18th-Century philosophy and Chinese philosophy. Expertise also extends to ancient philosophy, Kant, 20th-Century analytic philosophy, history and philosophy of science, cognitive science, moral psychology, normative ethics, philosophy of law, metaphysics, epistemology, philosophy of language, and philosophical logic."
       },
       {
-        "name": "Theater Studies",
-        "description": "Combines study of history, theory of theater, performance and dramatic literature with development of new works and new media integration.",
-        "undergraduate_programs": ["Major", "Minor"],
-        "research_areas": ["Set and lighting design", "Directing", "Playwriting", "TV writing", "Dramatic literature", "Acting and puppetry", "Performance and film studies", "Literary and cultural criticism", "Theater history"],
-        "specializations": ["Chinese theater", "Russian theater", "British and American theater"]
+        "major": "Physics",
+        "description": "Research ranges from astrophysics to condensed matter physics and nanoscale materials exploration, to non-linear and complex systems and biological physics with applications for medicine, energy and environmental science. U.S. News ranks the department in the top 6 for nuclear physics and in the top 30 for physics overall. Faculty conducts highly collaborative international research in high-energy physics; accelerator-based experimental nuclear physics; theoretical nuclear and particle physics; and experimental quantum optical physics."
       },
       {
-        "name": "Thompson Writing Program",
-        "description": "Ranked among top five writing programs in the country, exploring impacts of written, oral, and digital rhetoric.",
-        "undergraduate_offerings": "Courses in written, verbal, and digital communication",
-        "graduate_offerings": "Courses and programming for writing excellence and teaching",
-        "additional_programs": ["Writing-in-the-Disciplines program", "TWP Faculty Write Program", "TWP Writing Studio"]
+        "major": "Political Science",
+        "description": "Among the top ten programs nationally for many years. Faculty contributes to the general fields of political economy, philosophy, institutions including law, and public policy. Research encompasses normative political theory & philosophy; political behavior & identities; political economy; political institutions; political methodology; and security, peace & conflict. Affiliated with the Certificate in Philosophy, Politics & Economics and the Certificate in Decision Sciences."
+      },
+      {
+        "major": "Program II",
+        "description": "Self-designed degree program established in 1968 offering students the option to design their own individualized degree program. Serves students whose intellectual interests cross departmental boundaries or who perceive areas of learning in clusters other than those already offered in traditional majors. Students design their own curriculum to examine and explore a specific topic, question, or theme, requiring 15-18 core courses and a two-semester Senior Capstone Project. Students must have a faculty advisor (regular-rank faculty member in Arts & Sciences) and submit a written proposal including a 4-6 page personal statement, list of core courses, long-range plan (semester-by-semester course listing), justification of program title, and Senior Capstone Project plan. Application timing: between end of second semester and end of fifth semester, typically during second year. Past examples include Anthrozoology with focus on canines, Southern political experience, Health Beyond Care, and Immigration studies. Most successful proposals include courses from 4-6 different academic departments. Special features include Graduation with Distinction option, Program II Majors' Union, four information sessions per year, community lunches and retreats. Does not follow Program I requirements (no traditional major/minor structure)."
+      },
+      {
+        "major": "Psychology",
+        "description": "Internationally known for leadership in cognitive science and clinical psychology. Research in developmental psychology, social and personality psychology, cognitive psychology and cognitive neuroscience, and systems and integrative neuroscience deploys techniques such as experimental research with humans and animals, surveys, longitudinal field studies, brain imaging, genetic mapping and computational models. Scholarly exploration addresses decision-making, self-concept and self-regulation, PTSD, health and behavior, achievement and motivation, emotional memory, language acquisition and visual perception."
+      },
+      {
+        "major": "Public Policy Studies",
+        "description": "Interdisciplinary program analyzing public policy formation, implementation, and evaluation across various domains including domestic and international policy."
+      },
+      {
+        "major": "Religious Studies",
+        "description": "Very distinguished nationally. Explores the social organization and impact of religion in ancient and modern cultures through critical theory, literary and visual studies, and religious expression and influence on the media. Areas of expertise include early foundational documents of Judaism and Christianity (Hebrew Bible and New Testament); the religious traditions of Late Antiquity; Islam, Buddhism, and Hinduism both in their historical depth and in their contemporary manifestations. Graduate Program in Religion has ranked among the top programs in the country for twenty years."
+      },
+      {
+        "major": "Romance Studies",
+        "description": "National leader for having integrated the study of literature and language. Curriculum explores the rich traditions of Spanish, French, Portuguese, and Italian cultures, both in their countries of origin and in cultures of diaspora, including Latin America, the Caribbean, Quebec, and the Chicano border. Covers an extensive geographic area: from Europe to Africa and South America; from the Caribbean to the Philippines; from the Mediterranean to Indochina and the Mauritius Islands."
+      },
+      {
+        "major": "Russian",
+        "description": "Explores Russian language, literature, film, and translation. Part of Slavic & Eurasian Studies exploring the cultures and histories of Russia and Central/Eastern Europe."
+      },
+      {
+        "major": "Slavic & Eurasian Studies",
+        "description": "Explores the cultures and histories of Russia in its various historical incarnations (the tsarist empire, the Soviet Union, Russia) and Central/Eastern Europe—Bosnia, Czechia, Hungary, Poland, Romania, and Slovakia. Research interests focus on Russian language, literature, film, and translation; Polish language, literature, film, and popular culture; cognition and culture; semiotics; gender and language, literature, and film; medical humanities; death studies; imperial studies, gulag studies; Islamic studies; Jewish studies in Eastern Europe; and power and politics."
+      },
+      {
+        "major": "Sociology",
+        "description": "Ranked among the top 12 and rapidly approaching the top ten programs in the country. Faculty specializes in comparative and historical sociology; population studies across time focusing on fertility, migration, morbidity and mortality; medical and economic sociology; social stratification; and the sociology of morality and religion. Quantitative and qualitative approaches are deployed to understand the structure and dynamics of human societies in a global context."
+      },
+      {
+        "major": "Spanish, Latin American & Latino/a Studies",
+        "description": "Explores Spanish language and the rich traditions of Spanish, Latin American, and Latino/a cultures. Part of Romance Studies, covering cultures both in Spain and Latin America, and in Latino/a communities in the United States."
+      },
+      {
+        "major": "Statistical Science",
+        "description": "Top 10 program in statistical science and the premier Bayesian statistics program in the world. Helping Duke lead the data and computational revolution through research, teaching, and service. Award-winning faculty and students produce groundbreaking research in theory, methods, and applications that advances science and positively impacts society. Faculty and students collaborate with researchers in industry, government, and academia across disciplines."
+      },
+      {
+        "major": "Theater Studies",
+        "description": "Combines the study of the history and theory of theater, performance and dramatic literature in all its dimensions. The department is a laboratory for the development of new dramatic works and the exploration and integration of new media in theater. Faculty research encompasses set and lighting design; directing, playwriting, TV writing, dramatic literature, acting and puppetry; performance and film studies; literary and cultural criticism, and theater history with specialization in Chinese theater, Russian theater, and British and American theater."
+      },
+      {
+        "major": "Visual Arts",
+        "description": "Part of Art, Art History & Visual Studies department. Focus on creative practice in various media including painting, sculpture, photography, and digital arts, combined with critical analysis and art theory."
+      },
+      {
+        "major": "Visual & Media Studies",
+        "description": "Part of Art, Art History & Visual Studies department. Interdisciplinary study of visual culture, media technologies, film theory, and contemporary media practices across various platforms and contexts."
       }
     ]
   },
-  "engineering_majors": {
-    "majors": [
+  "pratt_school_engineering": {
+    "programs": [
       {
-        "name": "Biomedical Engineering",
-        "description": "Take on societally critical challenges in biology and health care, including the design of medical technology.",
-        "study_areas": ["Imaging and instrumentation", "Tissue engineering"],
-        "double_major_options": ["Civil Engineering", "Environmental Engineering", "Electrical and Computer Engineering", "Mechanical Engineering", "Computer Science"]
+        "major": "Biomedical Engineering",
+        "description": "Take on societally critical challenges in biology and health care, including the design of medical technology. Study areas include imaging and instrumentation, and tissue engineering. Double-major options available with Civil Engineering, Environmental Engineering, Electrical and Computer Engineering, Mechanical Engineering, and Computer Science."
       },
       {
-        "name": "Civil Engineering",
-        "description": "Lead the Fifth Industrial Revolution—designing solutions aimed at broadly-shared well-being, for people and the planet.",
-        "study_areas": ["Structural engineering and mechanics", "Environmental engineering and water resources"],
-        "double_major_options": ["Biomedical Engineering"]
+        "major": "Civil Engineering",
+        "description": "Lead the Fifth Industrial Revolution—designing solutions aimed at broadly-shared well-being, for people and the planet. Study areas include structural engineering and mechanics, and environmental engineering and water resources. Double-major option available with Biomedical Engineering."
       },
       {
-        "name": "Electrical & Computer Engineering",
-        "description": "Integrate computing and electronic knowledge with design skill to create new devices and software.",
-        "study_areas": ["Computer engineering and digital systems", "Solid-state devices and integrated circuits"],
-        "minors": ["Artificial Intelligence & Machine Learning", "Software Engineering"]
+        "major": "Electrical & Computer Engineering",
+        "description": "Integrate computing and electronic knowledge with design skill to create new devices and software. Study areas include computer engineering and digital systems, and solid-state devices and integrated circuits."
       },
       {
-        "name": "Environmental Engineering",
-        "description": "Develop systems and structures that restore and protect the planet's air, water and soil.",
-        "study_areas": ["Water resources engineering", "Biotechnology and bioremediation"],
-        "double_major_options": ["Biomedical Engineering"]
+        "major": "Environmental Engineering",
+        "description": "Develop systems and structures that restore and protect the planet's air, water and soil. Study areas include water resources engineering, and biotechnology and bioremediation. Double-major option available with Biomedical Engineering."
       },
       {
-        "name": "Mechanical Engineering",
-        "description": "Invent machines that improve lives, in fields as varied as health care, manufacturing, energy and transportation.",
-        "study_areas": ["Mechatronics", "Mechanical design"],
-        "double_major_options": ["Biomedical Engineering"]
+        "major": "Mechanical Engineering",
+        "description": "Invent machines that improve lives, in fields as varied as health care, manufacturing, energy and transportation. Study areas include mechatronics and mechanical design. Double-major option available with Biomedical Engineering."
       },
       {
-        "name": "IDEAS",
-        "full_name": "Interdisciplinary Engineering & Applied Science",
-        "description": "Explore a topic important to you through a customized major—pick a pre-approved template or propose your own.",
-        "type": "Interdisciplinary option"
+        "major": "IDEAS (Interdisciplinary Engineering & Applied Science)",
+        "description": "Self-designed engineering major where students explore ideas and topics beyond what's covered in the five departmental engineering majors. Design your own engineering major by choosing a pre-approved template or proposing your own. Students can apply as early as second semester of First Year, but not after Third Year begins, typically during Second Year. Students are responsible for identifying faculty advisor unless selecting pre-approved template. Not specifically ABET accredited, but satisfies national general engineering accreditation criteria. Requirements include 2 Independent Study, Capstone Design, or Equivalent Courses comprising a Culminating Engineering Design Experience; five courses with at least one code of CE, HI, IJ, SB, or LG that must cumulatively cover at least 4 of 5 codes; Liberal Arts requirement courses must be taken post-matriculation on graded basis. Approved templates include Risk, Data, and Financial Engineering (focus on risk and resilience engineering, data science, and machine learning with culminating engineering design experience) and General Curriculum template for creating unique curriculum. Students can use pre-approved curricula templates or propose their own unique combinations in consultation with independent study advisor and faculty members."
       }
     ]
   }

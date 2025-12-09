@@ -1,4 +1,3 @@
-// src/screens/EventDetailScreen.tsx
 import React, { useState } from 'react';
 import { 
   View, 
@@ -34,7 +33,6 @@ export default function EventDetailScreen({ navigation, route }: EventDetailScre
   };
 
   const handleSaveEvent = () => {
-    // For now, just toggle saved state (we'll add real persistence later)
     setIsSaved(!isSaved);
     Alert.alert(
       isSaved ? 'Event Removed' : 'Event Saved',
@@ -65,7 +63,6 @@ export default function EventDetailScreen({ navigation, route }: EventDetailScre
   return (
     <View style={styles.container}>
       <ScrollView style={styles.content} showsVerticalScrollIndicator={true}>
-        {/* Header Section */}
         <View style={styles.header}>
           <View style={styles.categoryBadge}>
             <Text style={styles.categoryText}>{event.category}</Text>
@@ -74,20 +71,17 @@ export default function EventDetailScreen({ navigation, route }: EventDetailScre
           <Text style={styles.organization}>{event.organization}</Text>
         </View>
 
-        {/* Date & Time */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>When</Text>
           <Text style={styles.dateText}>{formatDate(event.date)}</Text>
           <Text style={styles.timeText}>{event.time}</Text>
         </View>
 
-        {/* Location */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Where</Text>
           <Text style={styles.locationText}>{event.location}</Text>
         </View>
 
-        {/* Description */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>About This Event</Text>
           <Text style={styles.descriptionText}>
@@ -95,7 +89,6 @@ export default function EventDetailScreen({ navigation, route }: EventDetailScre
           </Text>
         </View>
 
-        {/* Tags */}
         {event.tags.length > 0 && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Tags</Text>
@@ -109,7 +102,6 @@ export default function EventDetailScreen({ navigation, route }: EventDetailScre
           </View>
         )}
 
-        {/* Capacity */}
         {event.capacity && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Capacity</Text>
@@ -117,7 +109,6 @@ export default function EventDetailScreen({ navigation, route }: EventDetailScre
           </View>
         )}
 
-        {/* Contact Information */}
         {event.contactEmail && (
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>Contact</Text>
@@ -128,7 +119,7 @@ export default function EventDetailScreen({ navigation, route }: EventDetailScre
         )}
       </ScrollView>
 
-      {/* Action Buttons */}
+      {/* action buttons */}
       <View style={styles.actionButtons}>
         <TouchableOpacity 
           style={[styles.actionButton, styles.saveButton, isSaved && styles.savedButton]}

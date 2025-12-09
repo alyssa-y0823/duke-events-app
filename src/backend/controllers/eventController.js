@@ -152,11 +152,11 @@ exports.getMajors = async (req, res) => {
 
     for (const schoolKey in majorsData) {
       const school = majorsData[schoolKey];
-      const deptList = school.departments || school.majors || [];
+      const programList = school.programs || [];
 
-      deptList.forEach(dept => {
-        if (dept.name) {
-          majorList.push(dept.name);
+      programList.forEach(prog => {
+        if (prog.major) {
+          majorList.push(prog.major);
         }
       });
     }

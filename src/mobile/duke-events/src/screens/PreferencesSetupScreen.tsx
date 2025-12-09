@@ -22,13 +22,12 @@ export default function PreferencesSetupScreen({ navigation }: PreferencesSetupS
   const years = ['Freshman', 'Sophomore', 'Junior', 'Senior', 'Graduate'];
 
   const [majors, setMajors] = useState<string[]>([
-    'Computer Science', 'Other' // Initial fallback
+    'Computer Science', 'Other' // initial fallback
   ]);
 
   useEffect(() => {
     const fetchMajors = async () => {
       try {
-        // Use your backend URL (e.g. localhost or IP if on device)
         const response = await fetch('http://localhost:3000/events/majors');
         if (response.ok) {
           const data = await response.json();
@@ -88,7 +87,6 @@ export default function PreferencesSetupScreen({ navigation }: PreferencesSetupS
       await AsyncStorage.setItem('userPreferences', JSON.stringify(preferences));
       console.log('Preferences saved:', preferences);
 
-      // Navigate to Home
       navigation.navigate('Home');
     } catch (error) {
       console.error('Error saving preferences:', error);
@@ -112,7 +110,7 @@ export default function PreferencesSetupScreen({ navigation }: PreferencesSetupS
             </Text>
           </View>
 
-          {/* Year Selection */}
+          {/* year */}
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>What year are you?</Text>
             <View style={styles.optionsContainer}>
@@ -138,7 +136,7 @@ export default function PreferencesSetupScreen({ navigation }: PreferencesSetupS
             </View>
           </View>
 
-          {/* Major Selection */}
+          {/* major */}
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>What's your major?</Text>
             <View style={styles.optionsContainer}>
@@ -164,7 +162,7 @@ export default function PreferencesSetupScreen({ navigation }: PreferencesSetupS
             </View>
           </View>
 
-          {/* Interests Selection */}
+          {/* interests */}
           <View style={styles.section}>
             <Text style={styles.sectionTitle}>What interests you? (Select all that apply)</Text>
             <View style={styles.interestsContainer}>

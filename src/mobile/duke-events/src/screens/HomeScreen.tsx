@@ -51,9 +51,6 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
       let eventData: ExtendedEvent[] = [];
 
       if (filter === 'recommended' && preferences) {
-        // Calculate weights based on slider
-        // If recencyWeight is 1.0, only recency matters.
-        // If 0.0, only relevance (sim + label) matters.
         const w_recency = recencyWeight;
         const w_sim = (1.0 - recencyWeight) * 0.7; // 70% of remaining goes to semantic
         const w_label = (1.0 - recencyWeight) * 0.3; // 30% of remaining goes to label match
@@ -69,7 +66,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         eventData = await eventService.getAllEvents();
       }
 
-      // Check if events are already classified in cache
+      // check if events are already classified in cache
       const cachedClassifications = await loadCachedClassifications();
 
       const enhancedEvents: ExtendedEvent[] = eventData.map(event => {
@@ -77,13 +74,13 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         return {
           ...event,
           classification: cached,
-          relevanceScore: cached && preferences ? calculateRelevanceScore(event, cached, preferences) : 0,
+          relevanceScore: event.relevanceScore || 0,
         };
       });
 
       setEvents(enhancedEvents);
 
-      // Classify unclassified events in background
+      // classify unclassified events in background
       const unclassified = enhancedEvents.filter(e => !e.classification);
       if (unclassified.length > 0) {
         classifyEventsInBackground(unclassified);
@@ -100,10 +97,10 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
     try {
       const classifications = await eventClassifier.classifyEvents(eventsToClassify);
 
-      // Cache the classifications
+      // cache the classifications
       await cacheClassifications(classifications);
 
-      // Update events with classifications
+      // update events with classifications
       setEvents(prevEvents =>
         prevEvents.map(event => {
           const classification = classifications.get(event.id);
@@ -111,7 +108,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
             return {
               ...event,
               classification,
-              relevanceScore: preferences ? calculateRelevanceScore(event, classification, preferences) : 0,
+              relevanceScore: event.relevanceScore || 0,
             };
           }
           return event;
@@ -149,54 +146,6 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
     } catch (error) {
       console.error('Error caching classifications:', error);
     }
-  };
-
-  const calculateRelevanceScore = (
-    event: ExtendedEvent,
-    classification: ClassificationResult,
-    prefs: SimpleUserPreferences
-  ): number => {
-    let score = 0;
-
-    // Interest matching (highest weight) - 10 points per match
-    const interestMatches = classification.relevantInterests.filter((interest: string) =>
-      prefs.interests.includes(interest)
-    );
-    score += interestMatches.length * 10;
-
-    // Major matching - 15 points if exact match
-    if (classification.relevantMajors.includes(prefs.major)) {
-      score += 15;
-    }
-
-    // Year relevance - up to 10 points based on year-specific score
-    const yearKey = prefs.year.toLowerCase() as keyof typeof classification.yearRelevance;
-    score += classification.yearRelevance[yearKey] || 5;
-
-    // Tag matching with user interests - 5 points per match
-    const allTags = [...event.tags, ...classification.enhancedTags];
-    const tagMatches = allTags.filter((tag: string) =>
-      prefs.interests.some((interest: string) =>
-        tag.toLowerCase().includes(interest.toLowerCase()) ||
-        interest.toLowerCase().includes(tag.toLowerCase())
-      )
-    );
-    score += tagMatches.length * 5;
-
-    // Recency boost
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const eventDate = new Date(event.date);
-    eventDate.setHours(0, 0, 0, 0);
-    const daysUntil = Math.ceil((eventDate.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
-
-    if (daysUntil >= 0 && daysUntil <= 3) {
-      score += 5;
-    } else if (daysUntil > 3 && daysUntil <= 7) {
-      score += 2;
-    }
-
-    return Math.min(score, 100); // Cap at 100
   };
 
   const getSortedEvents = () => {
@@ -238,8 +187,7 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* Header and Controls */}
-      < View style={styles.headerContainer} >
+      <View style={styles.headerContainer}>
         <View>
           <Text style={styles.header}>
             Duke Events {preferences ? `• ${preferences.year}` : ''}
@@ -265,7 +213,6 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         </View>
       </View >
 
-      {/* Preferences Setup Prompt */}
       {
         !preferences && (
           <View style={styles.setupPrompt}>
@@ -283,7 +230,6 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         )
       }
 
-      {/* Filter buttons */}
       <View style={styles.filterContainer}>
         {preferences && (
           <TouchableOpacity
@@ -313,7 +259,6 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
         </TouchableOpacity>
       </View>
 
-      {/* Event List */}
       {
         loading ? (
           <View style={styles.loadingContainer}>
@@ -341,7 +286,6 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                   onPress={() => navigation.navigate('EventDetail', { event })}
                   style={styles.eventCard}
                 >
-                  {/* Recommended Badge */}
                   {isHighlyRelevant && filter === 'recommended' && (
                     <View style={styles.recommendedBadge}>
                       <Text style={styles.recommendedBadgeText}>⭐ Recommended</Text>
@@ -367,7 +311,6 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                     <Text style={styles.eventOrganization}>{event.organization}</Text>
                   </View>
 
-                  {/* Tags and Classification Info */}
                   <View style={styles.tagsContainer}>
                     {event.classification?.enhancedTags.slice(0, 2).map((tag, tagIndex) => (
                       <View key={tagIndex} style={styles.tag}>
@@ -386,14 +329,12 @@ export default function HomeScreen({ navigation }: HomeScreenProps) {
                     )}
                   </View>
 
-                  {/* Show relevant majors if classified */}
                   {event.classification && event.classification.relevantMajors.length > 0 && (
                     <Text style={styles.majorText}>
                       For: {event.classification.relevantMajors.slice(0, 2).join(', ')}
                     </Text>
                   )}
 
-                  {/* Capacity info */}
                   {event.capacity && (
                     <Text style={styles.capacityText}>
                       Capacity: {event.capacity} people

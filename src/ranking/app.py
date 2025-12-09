@@ -1,9 +1,8 @@
 import sys
 import os
 
-# Add root to sys.path to find models
 current_dir = os.path.dirname(os.path.abspath(__file__))
-root_dir = os.path.dirname(os.path.dirname(current_dir)) # src/ranking -> src -> duke-events-app
+root_dir = os.path.dirname(os.path.dirname(current_dir))
 sys.path.append(root_dir)
 
 from flask import Flask, request, jsonify
@@ -27,14 +26,12 @@ try:
         
     # flatten structure
     for category in raw_majors.values():
-        val_list = category.get('departments', category.get('majors', []))
-        for item in val_list:
-            name = item.get('name', '').lower()
+        prog_list = category.get('programs', [])
+        for item in prog_list:
+            name = item.get('major', '').lower()
             desc = item.get('description', '')
-            research = " ".join(item.get('research_areas', []) + item.get('focus_areas', []) + item.get('study_areas', []))
-            MAJORS_DATA[name] = f"{desc} {research}"
+            MAJORS_DATA[name] = desc
             
-    print(f"Loaded {len(MAJORS_DATA)} majors for RAG.")
 except Exception as e:
     print(f"Warning: Could not load majors.json: {e}")
 
@@ -70,12 +67,11 @@ def rank_events():
     if not events:
         return jsonify([])
 
-    # 1. construct user query with RAG
+    # query embedding
     interests_str = " ".join(user_profile.get('interests', []))
     major_name = user_profile.get('major', '').strip()
     year = user_profile.get('year', '')
     
-    # RAG augmentation
     major_context = ""
     if major_name.lower() in MAJORS_DATA:
         major_context = MAJORS_DATA[major_name.lower()]
@@ -83,17 +79,16 @@ def rank_events():
     query_text = f"{major_name} {major_context} {year} {interests_str}".strip()
         
     if not query_text:
-        query_text = "general" # Fallback
+        query_text = "general"
 
     query_emb = embedder.embed_text(query_text)
 
-    # 2. get event embeddings
+    # event embeddings
     batch_texts = []
     batch_ids = []
     
     event_embs_list = []
     
-    # identify which events need embedding
     indices_to_compute = []
     
     for i, event in enumerate(events):

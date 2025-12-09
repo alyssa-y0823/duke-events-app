@@ -1,4 +1,3 @@
-// src/services/eventClassifier.ts
 import { ExtendedEvent } from '../types';
 import Constants from 'expo-constants';
 
@@ -7,15 +6,7 @@ import Constants from 'expo-constants';
 
 export interface ClassificationResult {
   relevantMajors: string[];
-  relevantInterests: string[];
   enhancedTags: string[];
-  yearRelevance: {
-    freshman: number;
-    sophomore: number;
-    junior: number;
-    senior: number;
-    graduate: number;
-  };
 }
 
 class EventClassifier {
@@ -23,27 +14,20 @@ class EventClassifier {
   private apiEndpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
 
   constructor() {
-    // Option 1: Using environment variable (if react-native-dotenv is set up)
-    // this.apiKey = GOOGLE_API_KEY || '';
-    
-    // Option 2: Hardcoded (for testing - replace YOUR_API_KEY_HERE)
-    // this.apiKey = 'YOUR_API_KEY_HERE';
-    
-    // Option 3: Read from process.env (web only)
     this.apiKey = Constants.expoConfig?.extra?.googleApiKey || '';
   }
 
   /**
-   * Classify a single event using Google's Gemini AI
+   * fallback classifier, rely on major & tag matching
    */
-  async classifyEvent(event: ExtendedEvent): Promise<ClassificationResult> {
+  async classifyEvent(event: ExtendedEvent): Promise<ClassificationResult | undefined> {
     try {
       const prompt = this.buildClassificationPrompt(event);
       const response = await this.callGeminiAPI(prompt);
       return this.parseClassificationResponse(response);
     } catch (error) {
       console.error('Error classifying event:', error);
-      return ;
+      return;
     }
   }
 
@@ -52,28 +36,30 @@ class EventClassifier {
    */
   async classifyEvents(events: ExtendedEvent[]): Promise<Map<string, ClassificationResult>> {
     const classifications = new Map<string, ClassificationResult>();
-    
+
     // process in batches of 5 to avoid rate limits
     for (let i = 0; i < events.length; i += 5) {
       const batch = events.slice(i, i + 5);
-      const batchPromises = batch.map(event => 
-        this.classifyEvent(event).then(result => ({ 
-          eventId: event.id, 
-          result 
+      const batchPromises = batch.map(event =>
+        this.classifyEvent(event).then(result => ({
+          eventId: event.id,
+          result
         }))
       );
-      
+
       const results = await Promise.all(batchPromises);
       results.forEach(({ eventId, result }) => {
-        classifications.set(eventId, result);
+        if (result) {
+          classifications.set(eventId, result);
+        }
       });
-      
+
       // small delay between batches
       if (i + 5 < events.length) {
         await new Promise(resolve => setTimeout(resolve, 1000));
       }
     }
-    
+
     return classifications;
   }
 
@@ -88,22 +74,12 @@ Existing Tags: ${event.tags.join(', ')}
 
 Classify this event by:
 1. Which majors would find this most relevant? (Choose from: Computer Science, Engineering, Biology, Economics, Psychology, Mathematics, Chemistry, Political Science, English, History, Public Policy, Other)
-2. Which interest categories apply? (Choose from: academic, sports, arts, social, professional, service, wellness, tech)
-3. What additional descriptive tags would help students find this?
-4. How relevant is this for each year level? (Rate 0-10 for each: freshman, sophomore, junior, senior, graduate)
+2. What additional descriptive tags would help students find this?
 
 Return this exact JSON structure with no markdown:
 {
   "relevantMajors": ["array of major names"],
-  "relevantInterests": ["array of interest IDs"],
-  "enhancedTags": ["array of descriptive tags"],
-  "yearRelevance": {
-    "freshman": 5,
-    "sophomore": 5,
-    "junior": 5,
-    "senior": 5,
-    "graduate": 5
-  }
+  "enhancedTags": ["array of descriptive tags"]
 }`;
   }
 
@@ -113,7 +89,7 @@ Return this exact JSON structure with no markdown:
     }
 
     const url = `${this.apiEndpoint}?key=${this.apiKey}`;
-    
+
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -142,42 +118,31 @@ Return this exact JSON structure with no markdown:
     }
 
     const data = await response.json();
-    
+
     if (!data.candidates || !data.candidates[0]?.content?.parts?.[0]?.text) {
       throw new Error('Unexpected API response format');
     }
-    
+
     return data.candidates[0].content.parts[0].text;
   }
 
   private parseClassificationResponse(response: string): ClassificationResult {
     try {
-      // Remove markdown code blocks if present
       let cleanedResponse = response.trim();
       cleanedResponse = cleanedResponse.replace(/```json\n?/g, '');
       cleanedResponse = cleanedResponse.replace(/```\n?/g, '');
       cleanedResponse = cleanedResponse.trim();
-      
-      // Extract JSON from response
+
       const jsonMatch = cleanedResponse.match(/\{[\s\S]*\}/);
       if (!jsonMatch) {
         throw new Error('No JSON found in response');
       }
-      
+
       const parsed = JSON.parse(jsonMatch[0]);
-      
-      // Validate and normalize the response
+
       return {
         relevantMajors: Array.isArray(parsed.relevantMajors) ? parsed.relevantMajors : [],
-        relevantInterests: Array.isArray(parsed.relevantInterests) ? parsed.relevantInterests : [],
         enhancedTags: Array.isArray(parsed.enhancedTags) ? parsed.enhancedTags : [],
-        yearRelevance: {
-          freshman: parsed.yearRelevance?.freshman || 5,
-          sophomore: parsed.yearRelevance?.sophomore || 5,
-          junior: parsed.yearRelevance?.junior || 5,
-          senior: parsed.yearRelevance?.senior || 5,
-          graduate: parsed.yearRelevance?.graduate || 5,
-        },
       };
     } catch (error) {
       console.error('Error parsing classification response:', error);

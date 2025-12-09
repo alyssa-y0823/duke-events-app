@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 interface AuthScreenProps {
-  navigation: any; // We'll type this properly later
+  navigation: any;
 }
 
 export default function AuthScreen({ navigation }: AuthScreenProps) {
@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#003366', // Duke blue
+    backgroundColor: '#003366',
     padding: 20,
   },
   title: {
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   button: {
-    backgroundColor: '#FFD700', // Duke gold
+    backgroundColor: '#FFD700', 
     paddingHorizontal: 30,
     paddingVertical: 15,
     borderRadius: 25,

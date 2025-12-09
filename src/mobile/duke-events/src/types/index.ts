@@ -1,4 +1,3 @@
-// src/types/index.ts
 import { ClassificationResult } from '../services/eventClassifier';
 
 // Base Event interface (keep your original)

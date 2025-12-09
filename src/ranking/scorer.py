@@ -6,7 +6,6 @@ def calculate_recency_score(event_time_str):
         if isinstance(event_time_str, str):
             event_date = datetime.fromisoformat(event_time_str.replace('Z', '+00:00'))
         elif isinstance(event_time_str, (int, float)):
-            # Assume UTC timestamp
             from datetime import timezone
             event_date = datetime.fromtimestamp(event_time_str, tz=timezone.utc)
         else:
@@ -39,12 +38,9 @@ def score_events(query_emb, event_embs, event_metadata, user_profile, weights=No
         weights = {'sim': 0.7, 'label': 0.1, 'recency': 0.2}
 
     scored_events = []
-    
-    # Pre-calculate query embedding normalization if not done, but we assume it is.
-    
+        
     for i, event in enumerate(event_metadata):
         # 1. semantic similarity
-        
         sim_score = np.dot(query_emb, event_embs[i])
         sim_score = float(max(0.0, min(1.0, sim_score))) # clip to 0-1
 
