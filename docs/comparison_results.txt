@@ -1,0 +1,66 @@
+Fetching Duke events for next 30 days...
+Fetched 162 valid events.
+Generating event embeddings...
+
+============================================================
+BASELINE MODEL (Chronological / Default)
+Everyone sees the same list:
+1. [2025-12-09 08:00] Duke Pediatrics Grand Rounds: Bridging Global Health Dispari
+2. [2025-12-09 08:00] No Hematology Case Conference
+3. [2025-12-09 09:00] Winter Writing Retreat
+4. [2025-12-09 09:30] Maixner Pain Research Symposium 2025
+5. [2025-12-09 10:00] Mobile Health Assessment
+============================================================
+
+HEURISTIC MODEL (Keyword Match)
+PROFILE: CS Student (Interests: coding, hackathon, technology, software, engineering)
+Top 5 Recommendations:
+1. [Score: 0.17] Duke Pediatrics Grand Rounds: Bridging Global Health Dispari
+2. [Score: 0.17] Cell Cycle Flexibility and the Path of Escape
+3. [Score: 0.17] Duke Anesthesiology Grand Rounds - "Better Together Rounds F
+4. [Score: 0.17] Office Hour: Electronic Lab Notebook (LabArchives) and RQMP
+5. [Score: 0.17] Webinar: Launching a Power Sector Competitiveness Dashboard 
+----------------------------------------
+PROFILE: Arts Student (Interests: music, gallery, performance, theater, dance, culture)
+Top 5 Recommendations:
+1. [Score: 0.29] Chamber Music at Duke: Cialde Quartet
+2. [Score: 0.29] SPRING DANCES CONCERT AUDITIONS - African/DANCE 432-01
+3. [Score: 0.29] SPRING DANCES CONCERT AUDITIONS - Modern/DANCE 412
+4. [Score: 0.29] SPRING DANCES CONCERT AUDITIONS - Hip-Hop/DANCE 444
+5. [Score: 0.14] Organ Demonstration
+----------------------------------------
+PROFILE: Sports Fan (Interests: basketball, football, athletics, game, sports)
+Top 5 Recommendations:
+1. [Score: 0.17] Virtual Hanukkah Candle Lighting with Special Guests Duke Pr
+2. [Score: 0.00] Duke Pediatrics Grand Rounds: Bridging Global Health Dispari
+3. [Score: 0.00] No Hematology Case Conference
+4. [Score: 0.00] Winter Writing Retreat
+5. [Score: 0.00] Maixner Pain Research Symposium 2025
+----------------------------------------
+============================================================
+
+ML MODEL (Semantic + Recency + Label)
+PROFILE: CS Student (Interests: coding, hackathon, technology, software, engineering)
+Top 5 Recommendations:
+1. [Score: 0.36] AI Health Data Science Poster Showcase
+2. [Score: 0.33] Researcher Fundamentals: Tools for Navigating Research at Du
+3. [Score: 0.31] MOCA® Simulation Course at Duke
+4. [Score: 0.31] CCN Colloquium: 2nd Year CCN Student Presentations
+5. [Score: 0.30] Organ Demonstration
+----------------------------------------
+PROFILE: Arts Student (Interests: music, gallery, performance, theater, dance, culture)
+Top 5 Recommendations:
+1. [Score: 0.46] Chamber Music at Duke: Cialde Quartet
+2. [Score: 0.42] Organ Demonstration
+3. [Score: 0.41] Organ Demonstration
+4. [Score: 0.39] SPRING DANCES CONCERT AUDITIONS - Modern/DANCE 412
+5. [Score: 0.38] Organ Demonstration
+----------------------------------------
+PROFILE: Sports Fan (Interests: basketball, football, athletics, game, sports)
+Top 5 Recommendations:
+1. [Score: 0.31] Duke Holiday Event
+2. [Score: 0.30] Mobile Health Assessment
+3. [Score: 0.29] Mobile Health Assessment
+4. [Score: 0.28] Duke GI Grand Rounds - "Introduction to Duke Endobariatrics:
+5. [Score: 0.28] Organ Demonstration
+----------------------------------------

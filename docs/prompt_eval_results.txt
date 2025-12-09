@@ -1,0 +1,33 @@
+Fetching Duke events...
+Embedding 162 events...
+
+================================================================================
+PROMPT EVALUATION: Computer Science
+Comparing different query construction strategies for the same user profile.
+================================================================================
+
+--- Strategy 1 (Tags) ---
+Query Text: "Computer Science coding hackathon technology artificial intelligence"
+  0.40 | AI Health Data Science Poster Showcase
+  0.23 | The False and its Falsifiers: Artistic Practices in Times of
+  0.22 | Organ Demonstration
+
+--- Strategy 2 (Natural) ---
+Query Text: "I am a Junior Computer Science student interested in coding, hackathons, technology, and artificial intelligence."
+  0.35 | AI Health Data Science Poster Showcase
+  0.32 | Researcher Fundamentals: Tools for Navigating Research at Du
+  0.31 | Organ Demonstration
+
+--- Strategy 3 (Role-Play) ---
+Query Text: "Target Persona: Computer Science Student. Key Interests: coding, hackathon, technology, artificial intelligence. Context: Academic and social events."
+  0.37 | Researcher Fundamentals: Tools for Navigating Research at Du
+  0.37 | AI Health Data Science Poster Showcase
+  0.34 | Psychological Safety & Inclusion
+
+================================================================================
+Strategy                  | Rank 1                                        | Rank 2                                        | Rank 3                                       
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Strategy 1 (Tags)         | AI Health Data Science Poster Showcase... (0.40) | The False and its Falsifiers: Artistic P... (0.23) | Organ Demonstration... (0.22)                
+Strategy 2 (Natural)      | AI Health Data Science Poster Showcase... (0.35) | Researcher Fundamentals: Tools for Navig... (0.32) | Organ Demonstration... (0.31)                
+Strategy 3 (Role-Play)    | Researcher Fundamentals: Tools for Navig... (0.37) | AI Health Data Science Poster Showcase... (0.37) | Psychological Safety & Inclusion... (0.34)   
+================================================================================

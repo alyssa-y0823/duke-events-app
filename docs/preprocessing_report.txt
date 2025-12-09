@@ -1,0 +1,15 @@
+Fetching Duke events for next 30 days...
+Starting preprocessing on 163 raw events...
+
+==================================================
+PREPROCESSING PIPELINE REPORT
+==================================================
+Input Events:          163
+Removed (Duplicates):  56
+Removed (Bad Dates):   0
+------------------------------
+Modified (No Desc):    0
+Modified (Whitespace): 57
+------------------------------
+Final Valid Events:    107
+==================================================

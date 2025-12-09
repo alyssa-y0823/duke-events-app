@@ -1,0 +1,39 @@
+Prompt Engineering Experiment Report
+
+GOAL: evaluate the effectiveness of different prompt construction strategies for generating user profile embeddings in the event recommendation system.
+
+METHODOLOGY: tested three strategies for constructing the query string passed to the embedding model (all-MiniLM-L6-v2) for a "Computer Science Student" profile.
+
+Strategy 1 (Tag-based)
+   Query: "Computer Science coding hackathon technology artificial intelligence"
+   Theory: Maximizes keyword density for cosine similarity.
+
+Results:
+- Rank 1: AI Health Data Science (0.40)
+- Rank 2: The False and its Falsifiers (0.23)
+Assessment: High first score but big drop-off. Rank 2 is irrelevant (arts event).
+
+Strategy 2 (Natural Language)
+   Query: "I am a Junior Computer Science student interested in coding, hackathons, technology, and artificial intelligence."
+   Theory: Provides semantic sentence structure closer to training data of sentence-transformers.
+
+Results:
+- Rank 1: AI Health Data Science (0.35)
+- Rank 2: Researcher Fundamentals (0.32)
+Assessment: More stable. Scores slightly lower but consistent across top results.
+
+Strategy 3 (Role-Playing)
+   Query: "Target Persona: Computer Science Student. Key Interests: coding, hackathon, technology, artificial intelligence. Context: Academic and social events."
+   Theory: Uses structured metadata keys to separate identity from interests, handling polysemy better.
+
+Results:
+- Rank 1: Researcher Fundamentals (0.37)
+- Rank 2: AI Health Data Science (0.37)
+Assessment: Best performance. High, consistent scores and multiple relevant events retrieved confidently.
+
+ANALYSIS
+- Tag-based approach is brittle. It latches onto exact matches (e.g., "AI") strongly but fails when exact keywords are missing, leading to noise filling the top slots.
+- Natural Language approach is safer but dilutes the keywords with stop words ("I am a...", "interested in"), slightly lowering the similarity scores for the top matches.
+- Role-Playing approach offered the best balance - explicitly defines the "Target Persona" and "Key Interests", maintaining high relevance scores for multiple items without drifting into noise.
+
+CONCLUSION: adopt the Role-Playing prompt structure for the production implementation of the `scorer.py` / ranking service.

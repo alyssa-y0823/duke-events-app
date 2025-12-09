@@ -1,0 +1,25 @@
+Initialize Embedder...
+Model Load Time: 1.8819s
+
+Benchmarking with 163 events.
+
+[Metric 1] Embedding Generation
+Total Time: 6.4603s
+Average Latency per Event: 39.63 ms
+Throughput: 25.23 events/sec
+
+[Metric 2] Inference / Ranking Time
+Query Embedding Latency: 1763.68 ms
+Scoring Latency (N=163): 2.04 ms
+Total End-to-End Inference: 1765.72 ms
+
+==================================================
+PERFORMANCE REPORT SUMMARY
+==================================================
+Events Processed: 163
+Throughput (Embedding): 25.23 events/sec
+Latencies:
+  - Per Event Embed: 39.63 ms
+  - Query Embed:     1763.68 ms
+  - Scoring (Rank):  2.04 ms
+==================================================

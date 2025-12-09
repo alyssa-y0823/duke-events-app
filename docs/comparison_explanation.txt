@@ -1,0 +1,48 @@
+Comparison Report: Baseline vs ML Model
+
+Goal: compare the baseline chronological ordering with the ML relevance model
+
+Methodology:
+- run the script src/ranking/compare_models.py
+
+Results:
+
+BASELINE MODEL- shows the same list for all users
+- rankings are mostly based on soonest upcoming events, not relevance
+
+Example top results:
+- Fit at the Farm: Yoga
+- MOCA® Simulation Course at Duke
+
+HEURISTIC MODEL
+- uses simple keyword matching
+Arts student: Works well (matches “music,” “dance”).
+CS student: Medium performance (finds some tech-related events but misses others like AI Health Data Science).
+Sports fan: Performs poorly due to lack of direct keyword matches.
+
+ML MODEL
+- re-ranks events using semantic relevance
+
+Arts Student
+- interests: music, gallery, performance
+- example top results:
+    - chamber Music at Duke (Score ~0.46)
+    - organ Demonstration (Score ~0.42)
+- notes: Finds relevant music/performance events even if not high in the baseline list.
+
+CS Student
+- interests: coding, technology
+- example top result:
+    - MOCA® Simulation Course at Duke (Score ~0.31)
+- notes: chooses technical/simulation events even without explicit "coding" keywords.
+
+Sports Fan
+- interests: basketball, football
+- notes: scores stay low (~0.30) because no sports events were available; model avoids false positives.
+
+Conclusion:
+- ML model is far better than the baseline for personalization.
+- Heuristic model can work in simple cases but fails on nuance.
+
+Recommendation: Use the ML model for the main ranking feed. The heuristic model can be a fallback if embeddings are unavailable.
+
