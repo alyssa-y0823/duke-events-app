@@ -11,3 +11,8 @@
 ## Datasets
 - **Duke Calendar API**: Event data is fetched dynamically from the Duke University public calendar feed (`https://calendar.duke.edu/events/index.json`).
 - **Majors Data**: `data/majors.json` contains descriptions of Duke University majors for the RAG system.
+
+## AI-Generated Code
+- Portions of this codebase were developed with assistance from Claude (Anthropic AI assistant), particularly:
+    - Testing infrastructure
+    - Code structure and error handling pattern

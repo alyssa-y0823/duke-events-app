@@ -1,0 +1,44 @@
+Embedding 163 events...
+
+================================================================================
+ABLATION STUDY: Arts Student
+Query: Target Persona: Visual Arts Student. Key Interests: music, gallery, performance, theater, dance. Context: Academic and social events.
+================================================================================
+
+--- Baseline (Balanced) ---
+Weights: {'sim': 0.7, 'label': 0.1, 'recency': 0.2}
+  1. [Score: 0.43] Chamber Music at Duke: Cialde Quartet
+     (Sim: 0.34, Lbl: 0.20, Rec: 0.83)
+  2. [Score: 0.40] ¡DALHE! Virtual Cafecito with Xiomara Mañón Boyce, MS
+     (Sim: 0.31, Lbl: 0.00, Rec: 0.93)
+  3. [Score: 0.38] The False and its Falsifiers: Artistic Practices in Times of
+     (Sim: 0.26, Lbl: 0.00, Rec: 0.97)
+
+--- Ablation: No Semantic ---
+Weights: {'sim': 0.0, 'label': 0.5, 'recency': 0.5}
+  1. [Score: 0.60] Organ Demonstration
+     (Sim: 0.10, Lbl: 0.20, Rec: 1.00)
+  2. [Score: 0.60] Duke Holiday Event
+     (Sim: 0.21, Lbl: 0.20, Rec: 1.00)
+  3. [Score: 0.60] Organ Demonstration
+     (Sim: 0.20, Lbl: 0.20, Rec: 1.00)
+
+--- Ablation: No Recency ---
+Weights: {'sim': 0.9, 'label': 0.1, 'recency': 0.0}
+  1. [Score: 0.33] Chamber Music at Duke: Cialde Quartet
+     (Sim: 0.34, Lbl: 0.20, Rec: 0.83)
+  2. [Score: 0.29] SPRING DANCES CONCERT AUDITIONS - Modern/DANCE 412
+     (Sim: 0.30, Lbl: 0.20, Rec: 0.03)
+  3. [Score: 0.28] ¡DALHE! Virtual Cafecito with Xiomara Mañón Boyce, MS
+     (Sim: 0.31, Lbl: 0.00, Rec: 0.93)
+
+--- Ablation: No Label ---
+Weights: {'sim': 0.8, 'label': 0.0, 'recency': 0.2}
+  1. [Score: 0.44] ¡DALHE! Virtual Cafecito with Xiomara Mañón Boyce, MS
+     (Sim: 0.31, Lbl: 0.00, Rec: 0.93)
+  2. [Score: 0.44] Chamber Music at Duke: Cialde Quartet
+     (Sim: 0.34, Lbl: 0.20, Rec: 0.83)
+  3. [Score: 0.40] The False and its Falsifiers: Artistic Practices in Times of
+     (Sim: 0.26, Lbl: 0.00, Rec: 0.97)
+
+================================================================================
